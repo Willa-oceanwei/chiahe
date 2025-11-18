@@ -9,9 +9,10 @@
   body {
     margin: 0;
     font-family: 'Arial', sans-serif;
-    color: #000; /* 黑色文字 */
+    color: #000; /* 文字黑色 */
     overflow-x: hidden;
-    background: url('assets/images/kevin-bessat-WfKZ-ZkWDbE-unsplash-15%25.JPG') no-repeat center center fixed;
+    /* 背景改用 GitHub raw 圖片 */
+    background: url('https://raw.githubusercontent.com/Willa-oceanwei/chiahe/main/assets/images/kevin-bessat-WfKZ-ZkWDbE-unsplash-15%25.JPG') no-repeat center center fixed;
     background-size: cover;
   }
 
@@ -33,6 +34,30 @@
     z-index: 2;
     text-align: center;
     padding: 50px 20px;
+  }
+
+  /* 導航列 */
+  nav ul {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* 文字靠上對齊 */
+    list-style: none;
+    padding: 0;
+    margin: 20px 0 0 0;
+    gap: 30px;
+  }
+
+  nav ul li a {
+    display: inline-block;
+    padding: 10px 15px;
+    background: rgba(255,255,255,0.1); /* 半透明按鈕底色 */
+    border-radius: 5px;
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  nav ul li a:hover {
+    background: rgba(255,255,255,0.3);
   }
 
   /* overlay 淡化背景 */
@@ -74,25 +99,23 @@
 
   /* 關閉按鈕 */
   .close-btn {
-    position: absolute;       /* 絕對定位 */
-    left: 20px;               /* 左下角靠左 */
-    bottom: 20px;             /* 左下角靠下 */
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
     padding: 10px 20px;
     border: none;
-    background: rgba(255,255,255,0.3);  /* 半透明白背景 */
-    color: #000;              /* 按鈕文字黑色，對比深灰背景 */
+    background: rgba(255,255,255,0.3);
+    color: #000; /* 按鈕文字黑色 */
     border-radius: 10px;
     cursor: pointer;
     font-size: 16px;
     z-index: 1010;
-    backdrop-filter: blur(10px); /* 玻璃效果 */
+    backdrop-filter: blur(10px);
   }
 
   .close-btn:hover {
     background: rgba(255,255,255,0.5);
   }
-
-  nav ul li a { cursor: pointer; }
 </style>
 </head>
 <body>
@@ -152,22 +175,22 @@ const closeBtn = document.getElementById('closeModal');
 const modalData = {
   intro: { 
     title:'Intro', 
-    img:'assets/images/kevin-bessat-WfKZ-ZkWDbE-unsplash.jpg', 
+    img:'https://raw.githubusercontent.com/Willa-oceanwei/chiahe/main/assets/images/kevin-bessat-WfKZ-ZkWDbE-unsplash-15%25.JPG', 
     content:'這裡是 Intro 區塊，包含圖片與文字。' 
   },
   work: { 
     title:'Work', 
-    img:'assets/images/kevin-bessat-WfKZ-ZkWDbE-unsplash.jpg', 
+    img:'https://raw.githubusercontent.com/Willa-oceanwei/chiahe/main/assets/images/kevin-bessat-WfKZ-ZkWDbE-unsplash-15%25.JPG', 
     content:'這裡展示你的專案作品。' 
   },
   about: { 
     title:'About', 
-    img:'assets/images/kevin-bessat-WfKZ-ZkWDbE-unsplash.jpg', 
+    img:'https://raw.githubusercontent.com/Willa-oceanwei/chiahe/main/assets/images/kevin-bessat-WfKZ-ZkWDbE-unsplash-15%25.JPG', 
     content:'簡短的自我介紹或公司介紹。' 
   },
   contact: { 
     title:'Contact', 
-    img:'assets/images/kevin-bessat-WfKZ-ZkWDbE-unsplash.jpg', 
+    img:'https://raw.githubusercontent.com/Willa-oceanwei/chiahe/main/assets/images/kevin-bessat-WfKZ-ZkWDbE-unsplash-15%25.JPG', 
     content:'聯絡資訊或表單區塊。' 
   }
 };
