@@ -54,7 +54,7 @@
     top: 50%; left: 50%;
     transform: translate(-50%,-50%) scale(0.85);
     width: 70%; max-width: 600px;
-    background: rgba(255,255,255,0.2);
+    background: rgba(40,40,40,0.8);  /* 深灰色半透明 */
     border-radius: 20px;
     backdrop-filter: blur(20px);
     box-shadow: 0 15px 40px rgba(0,0,0,0.3);
@@ -62,43 +62,34 @@
     opacity: 0;
     pointer-events: none;
     transition: all 0.35s ease;
-    color: #000;
+    color: #fff;  /* 文字白色 */
     z-index: 1000;
   }
-  .modal.active {
-    opacity:1;
-    pointer-events:auto;
-    transform: translate(-50%,-50%) scale(1);
-  }
 
-  .modal-header {
-    font-size: 28px;
-    font-weight: bold;
-    padding: 20px;
-    border-bottom: 1px solid rgba(0,0,0,0.2);
-  }
-
-  .modal-image img {
-    width: 100%;
-    border-radius: 0;
-    display: block;
-  }
-
+  /* 文字內容 */
+  .modal-header,
   .modal-content {
-    padding: 20px;
-    font-size: 16px;
-    line-height: 1.6;
-    color: #000;
+    color: #fff;
   }
 
+  /* 關閉按鈕 */
   .close-btn {
-    margin: 15px 20px;
+    position: absolute;       /* 絕對定位 */
+    left: 20px;               /* 左下角靠左 */
+    bottom: 20px;             /* 左下角靠下 */
     padding: 10px 20px;
     border: none;
-    background: rgba(255,255,255,0.8);
+    background: rgba(255,255,255,0.3);  /* 半透明白背景 */
+    color: #000;              /* 按鈕文字黑色，對比深灰背景 */
     border-radius: 10px;
     cursor: pointer;
     font-size: 16px;
+    z-index: 1010;
+    backdrop-filter: blur(10px); /* 玻璃效果 */
+  }
+
+  .close-btn:hover {
+    background: rgba(255,255,255,0.5);
   }
 
   nav ul li a { cursor: pointer; }
