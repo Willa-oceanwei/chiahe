@@ -101,42 +101,42 @@
   .modal {
     position: fixed;
     top: 50%; left: 50%;
-    transform: translate(-50%,-50%) scale(0.85);
-    width: 70%; max-width: 600px;
-    background: rgba(40,40,40,0.85); 
+    transform: translate(-50%, -50%) scale(0.85);
+    width: 70%;          /* 彈窗寬度 */
+    max-width: none;     /* 取消限制 */
+    background: rgba(40,40,40,0.85);
     border-radius: 20px;
     backdrop-filter: blur(20px);
     box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-    padding: 0;
     opacity: 0;
     pointer-events: none;
     transition: all 0.35s ease;
     color: #fff;
     z-index: 1000;
+    overflow: hidden;    /* 防止圖片溢出 */
   }
+
   .modal.active {
     opacity: 1;
     pointer-events: auto;
-    transform: translate(-50%,-50%) scale(1);
+    transform: translate(-50%, -50%) scale(1);
   }
 
-  .modal-header {
-    font-size: 28px;
-    font-weight: bold;
-    padding: 20px;
-    border-bottom: 1px solid rgba(255,255,255,0.2);
+  /* 圖片區 */
+  .modal-image {
+    width: 100%;
+    aspect-ratio: 16 / 9;  /* 官方風格圖片比例 */
+    overflow: hidden;
   }
 
-  /* 調整彈窗圖片比例 */
   .modal-image img {
-      width: auto;          /* 避免拉伸 */
-      max-width: 90%;       /* 圖片最多占彈窗 90% 寬度 */
-      max-height: 200px;
-      display: block;
-      margin: 0 auto;       /* 水平置中 */
-      border-radius: 15px;  /* 可選，增加圓角感 */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  /* 讓圖片填滿容器但保持比例 */
+    display: block;
   }
 
+  /* 文字區 */
   .modal-content {
     padding: 20px;
     font-size: 16px;
