@@ -7,49 +7,94 @@
 <link rel="stylesheet" href="https://html5up.net/uploads/demos/dimension/assets/css/main.css" />
 <style>
   body {
-  background: url('images/your-background.jpg') no-repeat center center fixed;
-  background-size: cover;
-}
-body { font-family: 'Arial', sans-serif; margin:0; background:#111; color:#fff; overflow-x:hidden; }
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    color: #fff;
+    overflow-x: hidden;
+    /* 頁面主要背景 */
+    background: url('assets/images/kevin-bessat-WfKZ-ZkWDbE-unsplash.jpg') no-repeat center center fixed;
+    background-size: cover;
+  }
 
-#wrapper { position: relative; z-index: 0; }
+  #wrapper { position: relative; z-index: 0; }
 
-/* Modal overlay */
-#overlay {
-  position: fixed; top:0; left:0; width:100%; height:100%;
-  backdrop-filter: blur(10px) brightness(0.6);
-  opacity:0; pointer-events:none; transition: opacity 0.4s ease;
-  z-index: 999;
-}
-#overlay.active { opacity:1; pointer-events:auto; }
+  /* overlay 淡化背景 */
+  #overlay {
+    position: fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background: rgba(0,0,0,0.7);
+    opacity:0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    z-index: 999;
+  }
+  #overlay.active { opacity:1; pointer-events:auto; }
 
-.modal {
-  position: fixed; top:50%; left:50%; transform:translate(-50%,-50%) scale(0.85);
-  width:70%; max-width:550px; padding:40px;
-  background: rgba(255,255,255,0.2); border-radius:20px;
-  backdrop-filter: blur(25px); box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-  opacity:0; pointer-events:none; transition: all 0.35s ease; color:white;
-  z-index: 1000;
-}
-.modal.active { opacity:1; pointer-events:auto; transform:translate(-50%,-50%) scale(1); }
-.modal h2 { font-size:32px; margin-top:0; }
-.modal p { font-size:18px; line-height:1.6; }
-.close-btn { margin-top:20px; padding:12px 20px; border:none; background: rgba(255,255,255,0.85); border-radius:10px; cursor:pointer; font-size:16px; }
+  /* 玻璃彈窗 */
+  .modal {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%) scale(0.85);
+    width: 70%; max-width: 600px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    padding: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.35s ease;
+    color: white;
+    z-index: 1000;
+  }
+  .modal.active {
+    opacity:1;
+    pointer-events:auto;
+    transform: translate(-50%,-50%) scale(1);
+  }
 
-/* Header nav links */
-header nav ul li a { cursor:pointer; }
+  .modal-header {
+    font-size: 28px;
+    font-weight: bold;
+    padding: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+  }
+
+  .modal-image img {
+    width: 100%;
+    border-radius: 0;
+    display: block;
+  }
+
+  .modal-content {
+    padding: 20px;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .close-btn {
+    margin: 15px 20px;
+    padding: 10px 20px;
+    border: none;
+    background: rgba(255,255,255,0.8);
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  nav ul li a { cursor: pointer; }
 </style>
 </head>
 <body class="is-preload">
 
 <div id="wrapper">
-  <!-- Header -->
   <header id="header">
     <div class="logo"><span class="icon fa-gem"></span></div>
     <div class="content">
       <div class="inner">
         <h1>Dimension</h1>
-        <p>A fully responsive site template with glass modals.</p>
+        <p>Demo with Glass Modals</p>
       </div>
     </div>
     <nav>
@@ -58,50 +103,45 @@ header nav ul li a { cursor:pointer; }
         <li><a class="modal-link" data-modal="work">Work</a></li>
         <li><a class="modal-link" data-modal="about">About</a></li>
         <li><a class="modal-link" data-modal="contact">Contact</a></li>
-        <li><a class="modal-link" data-modal="source">Source</a></li>
       </ul>
     </nav>
   </header>
 
-  <!-- Main articles -->
   <div id="main">
-    <article id="intro"><h2 class="major">Intro</h2><span class="image main"><img src="https://html5up.net/uploads/demos/dimension/images/pic01.jpg" alt="" /></span></article>
-    <article id="work"><h2 class="major">Work</h2><span class="image main"><img src="https://html5up.net/uploads/demos/dimension/images/pic02.jpg" alt="" /></span></article>
-    <article id="about"><h2 class="major">About</h2><span class="image main"><img src="https://html5up.net/uploads/demos/dimension/images/pic03.jpg" alt="" /></span></article>
-    <article id="contact"><h2 class="major">Contact</h2></article>
-    <article id="source"><h2 class="major">Source</h2></article>
+    <!-- 可保留原 Dimension 的內容 -->
   </div>
 
-  <footer id="footer"><p class="copyright">© Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p></footer>
+  <footer id="footer">
+    <p class="copyright">© Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+  </footer>
 </div>
 
-<!-- Modal overlay -->
+<!-- overlay -->
 <div id="overlay"></div>
+
+<!-- modal 範例，點不同導航切換內容 -->
 <div class="modal" id="modalBox">
-  <h2 id="modalTitle">Title</h2>
-  <p id="modalContent">Content goes here...</p>
+  <div class="modal-header" id="modalTitle">Title</div>
+  <div class="modal-image"><img id="modalImage" src="" alt="Modal Image"></div>
+  <div class="modal-content" id="modalContent">Content goes here...</div>
   <button class="close-btn" id="closeModal">Close</button>
 </div>
 
-<script src="https://html5up.net/uploads/demos/dimension/assets/js/jquery.min.js"></script>
-<script src="https://html5up.net/uploads/demos/dimension/assets/js/browser.min.js"></script>
-<script src="https://html5up.net/uploads/demos/dimension/assets/js/breakpoints.min.js"></script>
-<script src="https://html5up.net/uploads/demos/dimension/assets/js/util.js"></script>
-<script src="https://html5up.net/uploads/demos/dimension/assets/js/main.js"></script>
 <script>
 const modalLinks = document.querySelectorAll('.modal-link');
 const overlay = document.getElementById('overlay');
 const modal = document.getElementById('modalBox');
 const modalTitle = document.getElementById('modalTitle');
+const modalImage = document.getElementById('modalImage');
 const modalContent = document.getElementById('modalContent');
 const closeBtn = document.getElementById('closeModal');
 
+// modal 對應資料
 const modalData = {
-  intro: { title: 'Intro', content: 'This is the Intro section using existing image.' },
-  work: { title: 'Work', content: 'Showcase your projects here.' },
-  about: { title: 'About', content: 'A short bio or description about yourself.' },
-  contact: { title: 'Contact', content: 'Your contact information or form goes here.' },
-  source: { title: 'Source', content: 'Reference links or credits.' }
+  intro: { title:'Intro', img:'assets/images/kevin-bessat-WfKZ-ZkWDbE-unsplash.jpg', content:'This is the Intro section with image.' },
+  work: { title:'Work', img:'assets/images/kevin-bessat-WfKZ-ZkWDbE-unsplash.jpg', content:'Showcase your projects here.' },
+  about: { title:'About', img:'assets/images/kevin-bessat-WfKZ-ZkWDbE-unsplash.jpg', content:'Short bio or description.' },
+  contact: { title:'Contact', img:'assets/images/kevin-bessat-WfKZ-ZkWDbE-unsplash.jpg', content:'Your contact info or form.' }
 };
 
 modalLinks.forEach(link => {
@@ -109,21 +149,22 @@ modalLinks.forEach(link => {
     e.preventDefault();
     const key = link.getAttribute('data-modal');
     modalTitle.textContent = modalData[key].title;
+    modalImage.src = modalData[key].img;
     modalContent.textContent = modalData[key].content;
-    modal.classList.add('active');
     overlay.classList.add('active');
+    modal.classList.add('active');
   });
 });
 
 closeBtn.onclick = () => {
-  modal.classList.remove('active');
   overlay.classList.remove('active');
+  modal.classList.remove('active');
 };
 
 document.addEventListener('keydown', e => {
   if(e.key === 'Escape') {
-    modal.classList.remove('active');
     overlay.classList.remove('active');
+    modal.classList.remove('active');
   }
 });
 </script>
