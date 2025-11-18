@@ -1,127 +1,65 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Overlay Page Demo</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #111;
-            color: #fff;
-            overflow-x: hidden;
-        }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dimension + Glass Modal</title>
+<link rel="stylesheet" href="https://html5up.net/uploads/demos/dimension/assets/css/main.css" />
+<style>
+body { font-family: 'Arial', sans-serif; margin:0; background:#111; color:#fff; overflow-x:hidden; }
 
-        header {
-            text-align: center;
-            padding: 40px 0;
-        }
+#wrapper { position: relative; z-index: 0; }
 
-        nav {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
+/* Modal overlay */
+#overlay {
+  position: fixed; top:0; left:0; width:100%; height:100%;
+  backdrop-filter: blur(10px) brightness(0.6);
+  opacity:0; pointer-events:none; transition: opacity 0.4s ease;
+  z-index: 999;
+}
+#overlay.active { opacity:1; pointer-events:auto; }
 
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 20px;
-            cursor: pointer;
-        }
+.modal {
+  position: fixed; top:50%; left:50%; transform:translate(-50%,-50%) scale(0.85);
+  width:70%; max-width:550px; padding:40px;
+  background: rgba(255,255,255,0.2); border-radius:20px;
+  backdrop-filter: blur(25px); box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+  opacity:0; pointer-events:none; transition: all 0.35s ease; color:white;
+  z-index: 1000;
+}
+.modal.active { opacity:1; pointer-events:auto; transform:translate(-50%,-50%) scale(1); }
+.modal h2 { font-size:32px; margin-top:0; }
+.modal p { font-size:18px; line-height:1.6; }
+.close-btn { margin-top:20px; padding:12px 20px; border:none; background: rgba(255,255,255,0.85); border-radius:10px; cursor:pointer; font-size:16px; }
 
-        /* === Overlay Page === */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 30px;
-            z-index: 999;
-        }
-
-        .overlay h2 {
-            font-size: 36px;
-            margin-bottom: 20px;
-        }
-
-        .close-btn {
-            margin-top: 30px;
-            padding: 10px 20px;
-            font-size: 18px;
-            background: #444;
-            border: none;
-            color: white;
-            cursor: pointer;
-        }
-    </style>
-</head>
-<body>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dimension + Modern Glass Modal</title>
-  <link rel="stylesheet" href="https://html5up.net/uploads/demos/dimension/assets/css/main.css" />
-  <style>
-    body { font-family: 'Arial', sans-serif; }
-
-    /* Overlay and modal styles */
-    #overlay {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      backdrop-filter: blur(10px) brightness(0.6);
-      opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
-    }
-    #overlay.active { opacity: 1; pointer-events: auto; }
-
-    .modal {
-      position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.85);
-      width: 70%; max-width: 550px; padding: 40px;
-      background: rgba(255,255,255,0.2); border-radius: 20px;
-      backdrop-filter: blur(25px); box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-      opacity: 0; pointer-events: none; transition: all 0.35s ease; color: white;
-    }
-    .modal.active { opacity: 1; pointer-events: auto; transform: translate(-50%, -50%) scale(1); }
-    .modal h2 { font-size: 32px; margin-top: 0; }
-    .modal p { font-size: 18px; line-height: 1.6; }
-    .close-btn { margin-top: 20px; padding: 12px 20px; border: none; background: rgba(255,255,255,0.85); border-radius: 10px; cursor: pointer; font-size: 16px; }
-
-    /* Optional: adjust z-index so modal appears above Dimension header */
-    #wrapper { position: relative; z-index: 0; }
-  </style>
+/* Header nav links */
+header nav ul li a { cursor:pointer; }
+</style>
 </head>
 <body class="is-preload">
 
 <div id="wrapper">
+  <!-- Header -->
   <header id="header">
     <div class="logo"><span class="icon fa-gem"></span></div>
     <div class="content">
       <div class="inner">
         <h1>Dimension</h1>
-        <p>A fully responsive site template with modern glass modals.</p>
+        <p>A fully responsive site template with glass modals.</p>
       </div>
     </div>
     <nav>
       <ul>
-        <li><a href="#" class="modal-link" data-modal="intro">Intro</a></li>
-        <li><a href="#" class="modal-link" data-modal="work">Work</a></li>
-        <li><a href="#" class="modal-link" data-modal="about">About</a></li>
-        <li><a href="#" class="modal-link" data-modal="contact">Contact</a></li>
-        <li><a href="#" class="modal-link" data-modal="source">Source</a></li>
+        <li><a class="modal-link" data-modal="intro">Intro</a></li>
+        <li><a class="modal-link" data-modal="work">Work</a></li>
+        <li><a class="modal-link" data-modal="about">About</a></li>
+        <li><a class="modal-link" data-modal="contact">Contact</a></li>
+        <li><a class="modal-link" data-modal="source">Source</a></li>
       </ul>
     </nav>
   </header>
 
+  <!-- Main articles -->
   <div id="main">
     <article id="intro"><h2 class="major">Intro</h2><span class="image main"><img src="https://html5up.net/uploads/demos/dimension/images/pic01.jpg" alt="" /></span></article>
     <article id="work"><h2 class="major">Work</h2><span class="image main"><img src="https://html5up.net/uploads/demos/dimension/images/pic02.jpg" alt="" /></span></article>
@@ -133,6 +71,7 @@
   <footer id="footer"><p class="copyright">© Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p></footer>
 </div>
 
+<!-- Modal overlay -->
 <div id="overlay"></div>
 <div class="modal" id="modalBox">
   <h2 id="modalTitle">Title</h2>
@@ -145,7 +84,6 @@
 <script src="https://html5up.net/uploads/demos/dimension/assets/js/breakpoints.min.js"></script>
 <script src="https://html5up.net/uploads/demos/dimension/assets/js/util.js"></script>
 <script src="https://html5up.net/uploads/demos/dimension/assets/js/main.js"></script>
-<script src="js/action.js"></script>
 <script>
 const modalLinks = document.querySelectorAll('.modal-link');
 const overlay = document.getElementById('overlay');
@@ -154,7 +92,6 @@ const modalTitle = document.getElementById('modalTitle');
 const modalContent = document.getElementById('modalContent');
 const closeBtn = document.getElementById('closeModal');
 
-// Modal content mapping
 const modalData = {
   intro: { title: 'Intro', content: 'This is the Intro section using existing image.' },
   work: { title: 'Work', content: 'Showcase your projects here.' },
@@ -186,47 +123,6 @@ document.addEventListener('keydown', e => {
   }
 });
 </script>
-</body>
-</html>
 
-    <header>
-        <h1>方案 A：主頁 + 分頁 Overlay</h1>
-        <nav>
-            <a onclick="openOverlay('intro')">Intro</a>
-            <a onclick="openOverlay('work')">Work</a>
-            <a onclick="openOverlay('contact')">Contact</a>
-        </nav>
-    </header>
-
-    <!-- Intro Overlay -->
-    <div id="intro" class="overlay">
-        <h2>Intro</h2>
-        <p>這裡是 Intro 內容。</p>
-        <button class="close-btn" onclick="closeOverlay('intro')">關閉</button>
-    </div>
-
-    <!-- Work Overlay -->
-    <div id="work" class="overlay">
-        <h2>Work</h2>
-        <p>這裡是 Work 內容。</p>
-        <button class="close-btn" onclick="closeOverlay('work')">關閉</button>
-    </div>
-
-    <!-- Contact Overlay -->
-    <div id="contact" class="overlay">
-        <h2>Contact</h2>
-        <p>這裡是 Contact 內容。</p>
-        <button class="close-btn" onclick="closeOverlay('contact')">關閉</button>
-    </div>
-
-    <script>
-        function openOverlay(id) {
-            document.getElementById(id).style.display = 'flex';
-        }
-
-        function closeOverlay(id) {
-            document.getElementById(id).style.display = 'none';
-        }
-    </script>
 </body>
 </html>
