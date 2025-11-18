@@ -124,16 +124,18 @@
 
   /* 圖片區 */
   .modal-image {
-    width: 100%;
-    aspect-ratio: 16 / 9;  /* 官方風格圖片比例 */
-    overflow: hidden;
+      width: 100%;             /* 保持彈窗整體寬度 */
+      display: flex;           /* 使用 flex 置中圖片 */
+      justify-content: center; /* 水平置中 */
+      margin-top: 0;
+      margin-bottom: 0;
   }
 
   .modal-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;  /* 讓圖片填滿容器但保持比例 */
-    display: block;
+      width: 90%;             /* 圖片寬度占彈窗的90% */
+      height: auto;           /* 保持圖片比例 */
+      object-fit: cover;      /* 防止拉伸 */
+      border-radius: 5px;    /* 可選：圖片圓角 */
   }
 
   /* 文字區 */
