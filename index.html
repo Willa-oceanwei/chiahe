@@ -233,11 +233,51 @@ const modalContent = document.getElementById('modalContent');
 const closeBtn = document.getElementById('closeModal');
 
 const modalData = {
-  intro: { title:'關於佳咊', img:'assets/images/kevin-bessat-WfKZ-ZkWDbE-unsplash.jpg', content:'這裡是 Intro 區塊，包含圖片與文字。' },
-  work: { title:'服務內容', img:'assets/images/kevin-bessat-WfKZ-ZkWDbE-unsplash.jpg', content:'這裡展示你的專案作品。' },
-  about: { title:'產品內容', img:'assets/images/kevin-bessat-WfKZ-ZkWDbE-unsplash.jpg', content:'簡短的自我介紹或公司介紹。' },
-  contact: { title:'聯繫我們', img:'assets/images/kevin-bessat-WfKZ-ZkWDbE-unsplash.jpg', content:'聯絡資訊或表單區塊。' }
+  intro: { 
+    title: '關於佳咊', 
+    img: 'https://raw.githubusercontent.com/Willa-oceanwei/chiahe/main/assets/images/about.jpg', 
+    content: `
+      佳咊實業成立於 1990 年，專注於色粉、顏料與色彩應用開發。
+      我們致力於提供穩定品質、創新配方與客製化服務。
+    `
+  },
+
+  work: { 
+    title: '服務內容', 
+    img: 'https://raw.githubusercontent.com/Willa-oceanwei/chiahe/main/assets/images/service.jpg', 
+    content: `
+      ・塑膠色粉調色  
+      ・Pantone 色號比對服務  
+      ・客製化顏色研發  
+      ・技術諮詢與色彩管理
+    `
+  },
+
+  about: { 
+    title: '產品內容', 
+    img: 'https://raw.githubusercontent.com/Willa-oceanwei/chiahe/main/assets/images/products.jpg', 
+    content: `
+      我們提供：  
+      ・PE 色母  
+      ・PP 色母  
+      ・透明色粉  
+      ・金屬色粉  
+      ・特殊效果顏料（珠光、螢光、金蔥）
+    `
+  },
+
+  contact: { 
+    title: '聯繫我們', 
+    img: 'https://raw.githubusercontent.com/Willa-oceanwei/chiahe/main/assets/images/contact.jpg', 
+    content: `
+      佳咊實業有限公司  
+      📍 台中市○○區 ○○路 123 號  
+      ☎ 04-1234-5678  
+      📧 service@chiahe.com.tw
+    `
+  }
 };
+
 
 modalLinks.forEach(link => {
   link.addEventListener('click', e => {
