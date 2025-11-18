@@ -62,23 +62,23 @@
   nav ul li a {
     display: inline-block;
     padding: 10px 15px;
-    background: rgba(40,40,40,0.4); /* 黑色半透明底, 前三個數字 50,50,50 → 顏色深淺（0=黑，255=白）,第四個數字 0.8 → 透明度（1=不透明，0=完全透明）*/
-    border: 2px solid #000;       /* 黑色邊框 */
+    background: rgba(40,40,40,0.4); 
+    border: 2px solid #000;       
     border-radius: 5px;
-    color: #000;                  /* 白字#fff,黑字#000 */
+    color: #000;                  
     text-decoration: none;
     font-weight: bold;
     transition: 0.3s;
   }
 
   nav ul li a:hover {
-    background: rgba(255,255,255,0.9); /* 滑鼠移上背景白色 */
-    color: #000;                       /* 滑鼠移上文字黑色 */
+    background: rgba(255,255,255,0.9); 
+    color: #000;                       
   }
 
   nav ul li a:active {
-    background: rgba(200,200,200,0.9); /* 按下背景灰色 */
-    color: #000;                        /* 按下文字黑色 */
+    background: rgba(200,200,200,0.9); 
+    color: #000;                        
   }
 
   /* overlay 淡化背景 */
@@ -88,7 +88,7 @@
       width: 100%; height: 100%;
       background: rgba(0,0,0,0.5);
       opacity: 0;
-      pointer-events: none; /* 只有 active 時才攔截 */
+      pointer-events: none; 
       transition: opacity 0.4s ease;
       z-index: 999;
   }
@@ -103,7 +103,7 @@
     top: 50%; left: 50%;
     transform: translate(-50%,-50%) scale(0.85);
     width: 70%; max-width: 600px;
-    background: rgba(40,40,40,0.85); /* 深灰半透明 */
+    background: rgba(40,40,40,0.85); 
     border-radius: 20px;
     backdrop-filter: blur(20px);
     box-shadow: 0 15px 40px rgba(0,0,0,0.3);
@@ -127,8 +127,12 @@
     border-bottom: 1px solid rgba(255,255,255,0.2);
   }
 
+  /* 調整彈窗圖片比例 */
   .modal-image img {
-    width: 100%;
+    width: 100%;        /* 寬度填滿彈窗 */
+    height: auto;       /* 高度自動 */
+    max-height: 350px;  /* 限制最大高度 */
+    object-fit: cover;  /* 裁切填滿 */
     display: block;
   }
 
@@ -150,6 +154,30 @@
     color: #000;
   }
 
+  /* header 文字設定 */
+  header .content .inner {
+      text-align: center;
+      font-family: 'Arial', sans-serif;
+  }
+
+  header .content .inner h1 {
+      font-size: 48px;     
+      color: #000000;      
+      font-weight: bold;
+      margin: 0;
+  }
+
+  header .content .inner p {
+      font-size: 26px;     
+      color: #333333;      
+      margin-top: 10px;
+  }
+
+  /* 導航列上下黑線 */
+  nav {
+      border-top: 2px solid #fff;
+      border-bottom: 2px solid #fff;
+  }
 </style>
 </head>
 <body>
@@ -180,34 +208,6 @@
   </footer>
 </div>
 
-<style>
-/* header 文字設定 */
-header .content .inner {
-    text-align: center;
-    font-family: 'Arial', sans-serif;
-}
-
-header .content .inner h1 {
-    font-size: 48px;     /* 調整字體大小 */
-    color: #000000;      /* 黑色字 */
-    font-weight: bold;
-    margin: 0;
-}
-
-header .content .inner p {
-    font-size: 26px;     /* 調整字體大小 */
-    color: #333333;      /* 深灰色字 */
-    margin-top: 10px;
-}
-
-/* 導航列上下黑線 */
-nav {
-    border-top: 2px solid #fff;
-    border-bottom: 2px solid #fff;
-}
-</style>
-
-
 <!-- overlay -->
 <div id="overlay"></div>
 
@@ -236,48 +236,35 @@ const modalData = {
   intro: { 
     title: '關於佳咊', 
     img: 'https://raw.githubusercontent.com/Willa-oceanwei/chiahe/main/assets/images/about.jpg', 
-    content: `
-      佳咊實業成立於 1990 年，專注於色粉、顏料與色彩應用開發。
-      我們致力於提供穩定品質、創新配方與客製化服務。
-    `
+    content: `佳咊實業成立於 1990 年，專注於色粉、顏料與色彩應用開發。我們致力於提供穩定品質、創新配方與客製化服務。`
   },
-
   work: { 
     title: '服務內容', 
     img: 'https://raw.github.com/Willa-oceanwei/chiahe/main/assets/images/majid-abparvar-work.jpg', 
-    content: `
-      ・塑膠色粉調色  
-      ・Pantone 色號比對服務  
-      ・客製化顏色研發  
-      ・技術諮詢與色彩管理
-    `
+    content: `・塑膠色粉調色  
+・Pantone 色號比對服務  
+・客製化顏色研發  
+・技術諮詢與色彩管理`
   },
-
   about: { 
     title: '產品內容', 
     img: 'https://raw.githubusercontent.com/Willa-oceanwei/chiahe/main/assets/images/products.jpg', 
-    content: `
-      我們提供：  
-      ・PE 色母  
-      ・PP 色母  
-      ・透明色粉  
-      ・金屬色粉  
-      ・特殊效果顏料（珠光、螢光、金蔥）
-    `
+    content: `我們提供：  
+・PE 色母  
+・PP 色母  
+・透明色粉  
+・金屬色粉  
+・特殊效果顏料（珠光、螢光、金蔥）`
   },
-
   contact: { 
     title: '聯繫我們', 
     img: 'https://raw.githubusercontent.com/Willa-oceanwei/chiahe/main/assets/images/contact.jpg', 
-    content: `
-      佳咊實業有限公司  
-      📍 台中市○○區 ○○路 123 號  
-      ☎ 04-1234-5678  
-      📧 service@chiahe.com.tw
-    `
+    content: `佳咊實業有限公司  
+📍 台中市○○區 ○○路 123 號  
+☎ 04-1234-5678  
+📧 service@chiahe.com.tw`
   }
 };
-
 
 modalLinks.forEach(link => {
   link.addEventListener('click', e => {
