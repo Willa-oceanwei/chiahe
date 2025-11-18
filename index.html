@@ -9,21 +9,38 @@
   body {
     margin: 0;
     font-family: 'Arial', sans-serif;
-    color: #000; /* 改黑色 */
+    color: #000; /* 黑色文字 */
     overflow-x: hidden;
-    /* 頁面主要背景 */
     background: url('assets/images/kevin-bessat-WfKZ-ZkWDbE-unsplash.jpg') no-repeat center center fixed;
     background-size: cover;
   }
 
   #wrapper { position: relative; z-index: 0; }
 
+  /* header 調整 */
+  header {
+    position: relative;
+    min-height: 100vh; /* 滿螢幕高度 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+  }
+
+  header .content .inner {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 50px 20px;
+  }
+
   /* overlay 淡化背景 */
   #overlay {
     position: fixed;
     top:0; left:0;
     width:100%; height:100%;
-    background: rgba(255,255,255,0.5); /* 白色半透明背景 */
+    background: rgba(255,255,255,0.5);
     opacity:0;
     pointer-events: none;
     transition: opacity 0.4s ease;
@@ -45,7 +62,7 @@
     opacity: 0;
     pointer-events: none;
     transition: all 0.35s ease;
-    color: #000; /* 改黑色 */
+    color: #000;
     z-index: 1000;
   }
   .modal.active {
@@ -71,7 +88,7 @@
     padding: 20px;
     font-size: 16px;
     line-height: 1.6;
-    color: #000; /* 改黑色 */
+    color: #000;
   }
 
   .close-btn {
@@ -87,7 +104,7 @@
   nav ul li a { cursor: pointer; }
 </style>
 </head>
-<body class="is-preload">
+<body>
 
 <div id="wrapper">
   <header id="header">
@@ -109,7 +126,7 @@
   </header>
 
   <div id="main">
-    <!-- 可保留原 Dimension 的內容 -->
+    <!-- 原 Dimension 內容 -->
   </div>
 
   <footer id="footer">
@@ -129,6 +146,10 @@
 </div>
 
 <script>
+window.addEventListener('load', () => {
+    document.body.classList.remove('is-preload'); // 移除 preload，文字顯示
+});
+
 const modalLinks = document.querySelectorAll('.modal-link');
 const overlay = document.getElementById('overlay');
 const modal = document.getElementById('modalBox');
@@ -137,7 +158,6 @@ const modalImage = document.getElementById('modalImage');
 const modalContent = document.getElementById('modalContent');
 const closeBtn = document.getElementById('closeModal');
 
-// modal 對應資料
 const modalData = {
   intro: { 
     title:'Intro', 
