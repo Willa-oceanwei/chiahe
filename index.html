@@ -32,9 +32,7 @@ body {
 }
 
 /* 禁用 Dimension transform 壓扁 logo */
-.logo-wrapper, 
-.logo-circle, 
-.diamond-shape {
+.logo-wrapper, .logo-circle, .diamond-shape {
   transform: none !important;
 }
 
@@ -114,16 +112,10 @@ nav ul.t-nav li a:hover {
   text-shadow: 0 0 5px rgba(255,255,255,0.7);
 }
 
-/* 下排四欄功能列，與 T 字導覽對齊 */
-.align-container {
-  width: 60%;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  padding: 0;
-}
+/* 下排四欄功能列 */
 .bottom-buttons {
-  width: 100%;
+  width: 60%;
+  margin: 40px auto 60px auto;
   display: flex;
   justify-content: space-between;
 }
@@ -131,17 +123,17 @@ nav ul.t-nav li a:hover {
   flex: 1;
   margin: 0 5px;
   padding: 12px 0;
-  border: 2px solid #fff;
-  border-radius: 6px;
-  background: rgba(255,255,240,0.85);
-  color: #222;
+  font-size: 16px;
   font-weight: bold;
+  border-radius: 6px;
+  border: 2px solid #fff;
+  background: rgba(255,255,255,0.85);
+  color: #222;
   cursor: pointer;
   transition: 0.3s;
 }
-.bottom-buttons button.reset {
-  background: #222;
-  color: #fff;
+.bottom-buttons button:hover {
+  background: rgba(255,255,255,1);
 }
 
 /* 玻璃彈窗 */
@@ -188,7 +180,7 @@ nav ul.t-nav li a:hover {
   margin-bottom: 20px;
 }
 
-/* 聯絡表單 */
+/* 聯絡我們表單 */
 .contact-form {
   display: flex;
   flex-direction: column;
@@ -213,22 +205,21 @@ nav ul.t-nav li a:hover {
 .contact-form .button-group {
   display: flex;
   gap: 15px;
-  justify-content: flex-start;
   width: 100%;
 }
 .contact-form .button-group button {
   flex: 1;
+  padding: 12px 0;
   border-radius: 6px;
   font-weight: 700;
   border: 2px solid #fff;
   cursor: pointer;
-  padding: 12px 0;
 }
-.contact-form #submitBtn {
+.contact-form button#submitBtn {
   background: rgba(255,255,240,0.85);
   color: #222;
 }
-.contact-form #resetBtn {
+.contact-form button#resetBtn {
   background: #222;
   color: #fff;
 }
@@ -282,7 +273,6 @@ nav ul.t-nav li a:hover {
     </div>
   </div>
 
-  <!-- T 型導覽列 -->
   <nav id="topNav">
     <ul class="t-nav">
       <li><a href="#" onclick="openModal('intro')">關於佳咊</a></li>
@@ -291,17 +281,15 @@ nav ul.t-nav li a:hover {
       <li><a href="#" onclick="openModal('contact')">聯絡我們</a></li>
     </ul>
   </nav>
-
-  <!-- 下排四欄功能列 -->
-  <div class="align-container">
-    <div class="bottom-buttons">
-      <button>功能一</button>
-      <button>功能二</button>
-      <button>功能三</button>
-      <button class="reset">功能四</button>
-    </div>
-  </div>
 </header>
+
+<!-- 下排四欄功能列 -->
+<div class="bottom-buttons">
+  <button onclick="openModal('intro')">關於佳咊</button>
+  <button onclick="openModal('work')">服務內容</button>
+  <button onclick="openModal('about')">產品介紹</button>
+  <button onclick="openModal('contact')">聯絡我們</button>
+</div>
 
 <!-- 背景遮罩 -->
 <div id="overlay"></div>
@@ -326,7 +314,6 @@ function openModal(key){
   const modal = document.getElementById('modalBox');
   const overlay = document.getElementById('overlay');
   const formContainer = document.getElementById('contactFormContainer');
-  const nav = document.getElementById('topNav');
 
   document.getElementById('modalTitle').innerHTML = modalData[key].title;
   document.getElementById('modalContent').innerHTML = modalData[key].content;
@@ -347,17 +334,18 @@ function openModal(key){
     `;
   } else { formContainer.innerHTML = ''; }
 
-  if(nav) nav.style.visibility = 'hidden';
   overlay.style.display = 'block';
   modal.style.display = 'block';
-  requestAnimationFrame(()=>{ overlay.classList.add('show'); modal.classList.add('show'); });
+  requestAnimationFrame(()=>{
+    overlay.classList.add('show');
+    modal.classList.add('show');
+  });
 }
 
 function closeModal(){
   const modal = document.getElementById('modalBox');
   const overlay = document.getElementById('overlay');
   const formContainer = document.getElementById('contactFormContainer');
-  const nav = document.getElementById('topNav');
 
   modal.classList.remove('show');
   overlay.classList.remove('show');
@@ -366,11 +354,18 @@ function closeModal(){
     modal.style.display = 'none';
     overlay.style.display = 'none';
     formContainer.innerHTML = '';
-    if(nav) nav.style.visibility = 'visible';
   }, 300);
 }
 
 document.getElementById('overlay').onclick = closeModal;
+
+// 初始 hash 跳轉處理
+window.addEventListener('load', ()=>{
+  const hash = location.hash.replace('#','');
+  if(hash && modalData[hash]){
+    openModal(hash);
+  }
+});
 </script>
 
 </body>
