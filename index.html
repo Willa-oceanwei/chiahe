@@ -32,7 +32,7 @@ body {
 }
 @keyframes headerFadeIn { to { opacity: 1; } }
 
-/* ★ 修正 logo 不被 Dimension 的 transform 壓扁 */
+/* 禁用 Dimension transform 壓扁 logo */
 .logo-wrapper, 
 .logo-circle, 
 .diamond-shape {
@@ -57,7 +57,6 @@ body {
   justify-content: center;
   align-items: center;
 }
-/* ★菱形本體（修正版） */
 .diamond-shape {
   width: 50px;
   height: 50px;
@@ -120,11 +119,12 @@ nav ul.t-nav li a:hover {
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 60%;
+  width: 50%;
+  max-width: 600px;
   transform: translate(-50%, -50%) scale(0.9);
   background: rgba(0,0,0,0.8);
   backdrop-filter: blur(12px);
-  padding: 40px;
+  padding: 30px;
   border-radius: 16px;
   text-align: center;
   z-index: 9999;
@@ -138,17 +138,7 @@ nav ul.t-nav li a:hover {
   transform: translate(-50%, -50%) scale(1);
 }
 
-/* ★彈幕圖片 — 官方比例，不佔滿整個畫面 */
-.modal-image img {
-  width: 80%;
-  height: 40vh;  /* 調整高度 */
-  object-fit: cover;
-  object-position: center;
-  border-radius: 10px;
-  margin-bottom: 20px;
-}
-
-/* ★彈幕標題 — 左對齊、加粗、底線 */
+/* 彈窗標題 */
 .modal-header {
   font-size: 28px;
   color: #fff;
@@ -159,26 +149,32 @@ nav ul.t-nav li a:hover {
   margin-bottom: 20px;
 }
 
+/* 彈窗內容 */
 .modal-content {
   font-size: 18px;
   color: #fff;
   line-height: 1.6;
   text-align: left;
+  margin-bottom: 20px;
 }
 
-/* 聯絡表單 */
+/* 聯絡我們表單 — Dimension 官網排版 */
 .contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-top: 15px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
 }
-.contact-form input,
-.contact-form textarea {
+.contact-form input, .contact-form textarea {
   padding: 10px;
   border-radius: 6px;
   border: none;
   font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.contact-form textarea {
+  grid-column: 1 / span 2; /* 下排訊息欄 */
+  resize: vertical;
 }
 .contact-form button {
   padding: 10px 20px;
@@ -194,6 +190,12 @@ nav ul.t-nav li a:hover {
 .contact-form button#resetBtn {
   background-color: #dc3545;
   color: #fff;
+}
+.contact-form .button-group {
+  grid-column: 1 / span 2;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
 }
 
 /* 關閉按鈕 */
@@ -252,7 +254,7 @@ nav ul.t-nav li a:hover {
     </div>
   </div>
 
-  <!-- T 字導覽列 -->
+  <!-- T 型導覽列 -->
   <nav>
     <ul class="t-nav">
       <li><a href="#" onclick="openModal('intro')">關於佳咊</a></li>
@@ -269,7 +271,6 @@ nav ul.t-nav li a:hover {
 <!-- 玻璃彈窗 -->
 <div class="modal" id="modalBox">
   <div class="modal-header" id="modalTitle">標題</div>
-  <div class="modal-image"><img id="modalImage" src=""></div>
   <div class="modal-content" id="modalContent">內容文字</div>
   <div id="contactFormContainer"></div>
   <button class="close-btn" onclick="closeModal()">關閉</button>
@@ -280,22 +281,18 @@ nav ul.t-nav li a:hover {
 const modalData = {
   intro: {
     title: '關於佳咊',
-    img: 'https://raw.githubusercontent.com/Willa-oceanwei/chiahe/main/assets/images/about.jpg',
     content: '佳咊實業成立於1990年，專注於色粉、顏料與色彩應用開發。我們致力於提供穩定品質、創新配方與客製化服務。'
   },
   work: {
     title: '服務內容',
-    img: 'https://raw.githubusercontent.com/Willa-oceanwei/chiahe/main/assets/images/modalData.work.img.jpg',
     content: '・塑膠色粉調色  ・Pantone 色號比對  ・客製化顏色研發  ・技術諮詢與色彩管理'
   },
   about: {
     title: '產品介紹',
-    img: 'https://raw.githubusercontent.com/Willa-oceanwei/chiahe/main/assets/images/products.jpg',
     content: '我們提供： PE色母、PP色母、透明色粉、金屬色粉、特殊效果顏料（珠光、螢光、金蔥）'
   },
   contact: {
     title: '聯絡我們',
-    img: 'https://raw.githubusercontent.com/Willa-oceanwei/chiahe/main/assets/images/contact.jpg',
     content: ''
   }
 };
@@ -307,17 +304,15 @@ function openModal(key) {
   const formContainer = document.getElementById('contactFormContainer');
 
   document.getElementById('modalTitle').innerHTML = modalData[key].title;
-  document.getElementById('modalImage').src = modalData[key].img;
   document.getElementById('modalContent').innerHTML = modalData[key].content;
 
-  // 如果是聯絡表單，生成表單
   if(key === 'contact'){
     formContainer.innerHTML = `
       <form class="contact-form">
         <input type="text" placeholder="姓名" required />
         <input type="email" placeholder="Email" required />
         <textarea placeholder="訊息" rows="4" required></textarea>
-        <div style="display:flex; gap:10px;">
+        <div class="button-group">
           <button type="submit" id="submitBtn">傳送</button>
           <button type="reset" id="resetBtn">重新填寫</button>
         </div>
