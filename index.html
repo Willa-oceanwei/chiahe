@@ -83,16 +83,16 @@ header .content .inner p {
   margin-top: 10px;
 }
 
-/* T 字導覽列，與官方一致 */
+/* T 字導覽列 */
 nav {
-  width: 60%; /* 與官方對齊 */
+  width: 60%;
   margin: 0 auto;
   opacity: 0;
   animation: navFadeIn 1s 1.2s forwards;
 }
 nav ul.t-nav {
   display: flex;
-  justify-content: space-between; /* 四個項目平均分布 */
+  justify-content: space-between;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -149,6 +149,16 @@ nav ul.t-nav li a:hover {
   margin-bottom: 20px;
 }
 
+/* 彈窗圖片 */
+.modal-image {
+  text-align: center;
+  margin: 20px 0;
+}
+.modal-image img {
+  max-width: 80%;
+  border-radius: 8px;
+}
+
 /* 彈窗內容 */
 .modal-content {
   font-size: 18px;
@@ -196,8 +206,8 @@ nav ul.t-nav li a:hover {
   cursor: pointer;
 }
 .contact-form button#submitBtn {
-  background-color: rgba(255, 255, 255, 0.85);
-  color: #000; !important; 
+  background-color: rgba(255, 255, 255, 0.85) !important;
+  color: #000 !important; 
 }
 .contact-form button#resetBtn {
   background: #000;
@@ -272,7 +282,7 @@ nav ul.t-nav li a:hover {
 
 <div class="modal" id="modalBox">
   <div class="modal-header" id="modalTitle">標題</div>
-  <div class="modal-content" id="modalContent">內容文字</div>
+  <div id="modalContent">內容文字</div>
   <div id="contactFormContainer"></div>
   <button class="close-btn" onclick="closeModal()">關閉</button>
 </div>
@@ -281,15 +291,18 @@ nav ul.t-nav li a:hover {
 const modalData = {
   intro: {
     title: '關於佳咊',
-    content: '佳咊實業成立於1990年，專注於色粉、顏料與色彩應用開發。我們致力於提供穩定品質、創新配方與客製化服務。'
+    content: '佳咊實業成立於1990年，專注於色粉、顏料與色彩應用開發。我們致力於提供穩定品質、創新配方與客製化服務。',
+    img: 'https://raw.githubusercontent.com/Willa-oceanwei/chiahe/main/assets/images/sample1.jpg'
   },
   work: {
     title: '服務內容',
-    content: '・塑膠色粉調色  ・Pantone 色號比對  ・客製化顏色研發  ・技術諮詢與色彩管理'
+    content: '・塑膠色粉調色  ・Pantone 色號比對  ・客製化顏色研發  ・技術諮詢與色彩管理',
+    img: 'https://raw.githubusercontent.com/Willa-oceanwei/chiahe/main/assets/images/sample2.jpg'
   },
   about: {
     title: '產品介紹',
-    content: '我們提供： PE色母、PP色母、透明色粉、金屬色粉、特殊效果顏料（珠光、螢光、金蔥）'
+    content: '我們提供： PE色母、PP色母、透明色粉、金屬色粉、特殊效果顏料（珠光、螢光、金蔥）',
+    img: 'https://raw.githubusercontent.com/Willa-oceanwei/chiahe/main/assets/images/sample3.jpg'
   },
   contact: {
     title: '聯絡我們',
@@ -301,11 +314,24 @@ function openModal(key){
   const modal = document.getElementById('modalBox');
   const overlay = document.getElementById('overlay');
   const formContainer = document.getElementById('contactFormContainer');
+  const modalContent = document.getElementById('modalContent');
   const nav = document.querySelector('nav');
 
   document.getElementById('modalTitle').innerHTML = modalData[key].title;
-  document.getElementById('modalContent').innerHTML = modalData[key].content;
 
+  // 判斷是否要顯示圖片
+  if(modalData[key].img){
+    modalContent.innerHTML = `
+      <div class="modal-image">
+        <img src="${modalData[key].img}" />
+      </div>
+      <div class="modal-text">${modalData[key].content}</div>
+    `;
+  } else {
+    modalContent.innerHTML = `<div class="modal-text">${modalData[key].content}</div>`;
+  }
+
+  // 聯絡我們表單
   if(key === 'contact'){
     formContainer.innerHTML = `
       <form class="contact-form">
