@@ -1,201 +1,113 @@
-<!DOCTYPE HTML>
-<html>
-  <head>
-    <title>佳咊實業有限公司</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="assets/css/main.css" />
-    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>佳咊實業有限公司</title>
 
-    <style>
-/* ============================= */
-/*  修正 Logo                    */
-/* ============================= */
-.logo-wrapper, .logo-circle, .diamond-shape {
-  transform: none !important;
-}
-.logo-wrapper {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 0;
-}
-.logo-circle {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  border: 2px solid #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.diamond-shape {
-  width: 55px;
-  height: 55px;
-  border: 3px solid #fff;
-  transform: rotate(45deg) !important;
-  background: transparent;
-}
+  <!-- Dimension 官方 CSS -->
+  <link rel="stylesheet" href="https://html5up.net/uploads/demos/dimension/assets/css/main.css" />
 
-/* ============================= */
-/*  彈幕圖片高度                 */
-/* ============================= */
-.modal .image.main img {
-  width: 100%;
-  height: 60vh; /* 可調整 40~75vh */
-  object-fit: cover;
-  object-position: center;
-  border-radius: 8px;
-}
+  <noscript>
+    <link rel="stylesheet" href="https://html5up.net/uploads/demos/dimension/assets/css/noscript.css" />
+  </noscript>
 
-/* ============================= */
-/*  Contact Form（官方同款）   */
-/* ============================= */
-#contact .fields {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0 0 1.5em 0;
-}
-#contact .field {
-  padding: 0 1em 1em 0;
-  flex: 1 1 100%;
-}
-#contact .field.half {
-  flex: 1 1 50%;
-}
-#contact label {
-  font-weight: 700;
-  margin-bottom: 0.4em;
-  display: block;
-}
-#contact input,
-#contact textarea {
-  width: 100%;
-  border-radius: 5px;
-  padding: 0.75em;
-  border: 2px solid rgba(255,255,255,0.3);
-  background: rgba(255,255,255,0.05);
-  color: #fff;
-}
-#contact input:focus,
-#contact textarea:focus {
-  border-color: #fff;
-}
-#contact .actions input {
-  cursor: pointer;
-}
+  <style>
+    /* ====== 自訂：左對齊、粗體、底線 ====== */
+    h1.custom-title {
+      text-align: left !important;
+      font-weight: 900 !important;
+      font-size: 2.2em;
+      border-bottom: 3px solid #fff;
+      padding-bottom: 6px;
+      width: fit-content;
+    }
 
-/* 彈幕標題 */
-.danmu-title {
-  font-size: 1.4em;
-  font-weight: 700;
-  text-align: left;
-  margin-top: 1.5rem;
-  margin-bottom: 0.75rem;
-  padding-bottom: 0.4rem;
-  border-bottom: 2px solid rgba(255,255,255,0.2);
-}
-    </style>
-  </head>
+    /* ====== 自訂：讓背景維持 Dimension 官方比例 ====== */
+    #bg {
+      background-size: cover !important;
+      background-position: center !important;
+      background-attachment: fixed !important;
+    }
 
-  <body class="is-preload">
+    /* ====== 導覽列白字 ====== */
+    #header nav ul li a {
+      color: #ffffff !important;
+      font-weight: 700;
+    }
 
-    <!-- Wrapper -->
-    <div id="wrapper">
+    /* 解決 GitHub Pages 某些 CSS 加載問題 */
+    body.is-preload #wrapper {
+      opacity: 1 !important;
+    }
+  </style>
 
-      <!-- Header -->
-      <header id="header">
-        <div class="logo-wrapper">
-          <div class="logo-circle">
-            <div class="diamond-shape"></div>
-          </div>
-        </div>
-        <div class="content">
-          <div class="inner">
-            <h1>佳咊實業有限公司</h1>
-            <p>Chia He Industrial Co., Ltd.</p>
-          </div>
-        </div>
-        <nav>
-          <ul>
-            <li><a href="#intro">公司介紹</a></li>
-            <li><a href="#work">產品介紹</a></li>
-            <li><a href="#gallery">彈幕展示</a></li>
-            <li><a href="#contact">聯絡我們</a></li>
-          </ul>
-        </nav>
-      </header>
+</head>
 
-      <!-- Main -->
-      <div id="main">
+<body class="is-preload">
 
-        <!-- Intro -->
-        <article id="intro">
-          <h2 class="major">公司介紹</h2>
-          <p>您可以放入公司的介紹內容。</p>
-        </article>
+  <!-- Wrapper（一定要保留） -->
+  <div id="wrapper">
 
-        <!-- Work -->
-        <article id="work">
-          <h2 class="major">產品介紹</h2>
-          <p>您可以放入產品特色與說明。</p>
-        </article>
-
-        <!-- Gallery (彈幕展示) -->
-        <article id="gallery">
-          <h2 class="major">彈幕展示</h2>
-
-          <span class="image main">
-            <img src="images/pic01.jpg" alt="" />
-          </span>
-
-          <h3 class="danmu-title">展示圖片標題</h3>
-          <p>可加入你的文字說明。</p>
-        </article>
-
-        <!-- Contact -->
-        <article id="contact">
-          <h2 class="major">聯絡我們</h2>
-
-          <form method="post" action="#">
-            <div class="fields">
-              <div class="field half">
-                <label for="name">姓名</label>
-                <input type="text" name="name" id="name" />
-              </div>
-              <div class="field half">
-                <label for="email">Email</label>
-                <input type="email" name="email" id="email" />
-              </div>
-              <div class="field">
-                <label for="message">訊息</label>
-                <textarea name="message" id="message" rows="4"></textarea>
-              </div>
-            </div>
-            <ul class="actions">
-              <li><input type="submit" value="傳送" class="primary" /></li>
-              <li><input type="reset" value="重新填寫" /></li>
-            </ul>
-          </form>
-        </article>
-
+    <!-- ===== Header（T 型導覽） ===== -->
+    <header id="header">
+      <div class="logo">
+        <span class="icon fa-gem"></span>
       </div>
+      <div class="content">
+        <div class="inner">
+          <h1 class="custom-title">佳咊實業有限公司</h1>
+          <p>Chia He Industrial Co., Ltd.</p>
+        </div>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#intro">公司介紹</a></li>
+          <li><a href="#work">產品與服務</a></li>
+          <li><a href="#contact">聯絡我們</a></li>
+        </ul>
+      </nav>
+    </header>
 
-      <!-- Footer -->
-      <footer id="footer">
-        <p class="copyright">© 佳咊實業有限公司</p>
-      </footer>
+    <!-- ===== Main（Intro / Work） ===== -->
+    <div id="main">
+
+      <!-- Intro -->
+      <article id="intro">
+        <h2 class="major">公司介紹</h2>
+        <p>我們致力於提供專業色粉與配色服務，以精準穩定的品質協助客戶提升生產效率。</p>
+      </article>
+
+      <!-- Work -->
+      <article id="work">
+        <h2 class="major">產品與服務</h2>
+        <p>提供 Pantone 色粉調製、配方管理、技術諮詢等服務。</p>
+      </article>
+
+      <!-- Contact -->
+      <article id="contact">
+        <h2 class="major">聯絡我們</h2>
+        <p>Email：service@chiahe.com.tw</p>
+      </article>
 
     </div>
 
-    <!-- BG -->
-    <div id="bg"></div>
+    <!-- Footer -->
+    <footer id="footer">
+      <p class="copyright">&copy; 佳咊實業有限公司</p>
+    </footer>
 
-    <!-- Scripts -->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/browser.min.js"></script>
-    <script src="assets/js/breakpoints.min.js"></script>
-    <script src="assets/js/util.js"></script>
-    <script src="assets/js/main.js"></script>
+  </div>
 
-  </body>
+  <!-- ===== 背景（背景一定要獨立存在） ===== -->
+  <div id="bg"></div>
+
+  <!-- 官方 JS -->
+  <script src="https://html5up.net/uploads/demos/dimension/assets/js/jquery.min.js"></script>
+  <script src="https://html5up.net/uploads/demos/dimension/assets/js/browser.min.js"></script>
+  <script src="https://html5up.net/uploads/demos/dimension/assets/js/breakpoints.min.js"></script>
+  <script src="https://html5up.net/uploads/demos/dimension/assets/js/util.js"></script>
+  <script src="https://html5up.net/uploads/demos/dimension/assets/js/main.js"></script>
+
+</body>
 </html>
