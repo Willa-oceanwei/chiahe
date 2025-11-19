@@ -5,43 +5,68 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>佳咊實業有限公司</title>
 
-<!-- HTML5UP Dimension 原始 CSS -->
+<!-- HTML5UP Dimension 官方 CSS -->
 <link rel="stylesheet" href="https://html5up.net/uploads/demos/dimension/assets/css/main.css" />
 
 <style>
-/* --- 全站背景覆蓋 --- */
+
+/* ===========================
+   🔥 全站背景設定
+=========================== */
 body {
   background: url("assets/images/neom-SUIMrEKVOXc-unsplash.jpg") no-repeat center center fixed;
   background-size: cover;
 }
 
-/* --- 修正 Dimension 官方導覽列：永遠白字 --- */
-nav ul li a {
-  color: #ffffff !important;
+/* ===========================
+   🔥 導覽列恢復 Dimension 正中央圓鑽風格
+=========================== */
+/* nav 整體在畫面中央，左右各留白 25% */
+nav {
+  width: 50%;
+  margin: 0 auto;
 }
 
-/* --- 導覽列按鈕重新對齊為 Dimension 官方置中 --- */
+/* 白字 + 官方樣式 */
+nav ul li a {
+  color: #ffffff !important;
+  letter-spacing: 0.12em;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* 官方風格：導覽列置中排版 */
 nav ul {
   display: flex;
   justify-content: center;
-  gap: 0 !important;         /* 禁止左右縫隙（否則偏移） */
+  align-items: center;
 }
 
 nav ul li {
-  padding: 0 25px;          /* 平均分布 */
+  list-style: none;
+  padding: 0 18px;
+  text-align: center;
 }
 
-/* --- 彈窗（玻璃效果） --- */
+/* 中文置中 */
+nav ul li a {
+  display: inline-block;
+  text-align: center;
+}
+
+/* ===========================
+   🔥 彈窗（玻璃磨砂）
+=========================== */
 .modal {
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 60%;                  /* 🔥 整個彈窗寬度 */
+  width: 60%;
   transform: translate(-50%, -50%);
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(14px);
   padding: 40px;
-  border-radius: 16px;
+  border-radius: 18px;
   text-align: center;
   z-index: 9999;
   display: none;
@@ -52,40 +77,42 @@ nav ul li {
   font-size: 28px;
   margin-bottom: 20px;
   color: #fff;
+  font-weight: 700;
 }
 
-/* 彈窗圖片：寬度 80%，高度自動 */
+/* 🔥 你要求：圖片占彈窗 80% 並避免過高 */
 .modal-image img {
-  width: 80%;                 /* 🔥 你的要求：圖片占彈窗 80% */
-  height: 50%;               /* 高度自動、保持比例 */
+  width: 80%;
+  max-height: 45vh;      /* 限制最高不超過視窗的一半 */
+  object-fit: cover;
   border-radius: 10px;
   margin-bottom: 20px;
 }
 
-/* 彈窗文字 */
+/* 彈窗內容 */
 .modal-content {
   font-size: 18px;
   color: #fff;
   line-height: 1.6;
 }
 
-/* Close 按鈕（微透明） */
+/* Close 按鈕：透明與更明顯框線 */
 .close-btn {
   margin-top: 20px;
-  padding: 10px 25px;
-  font-size: 16px;
+  padding: 10px 26px;
+  font-size: 15px;
   border-radius: 10px;
-  border: 2px solid rgba(255, 255, 255, 0.5);
-  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.12);
   color: #fff;
   cursor: pointer;
 }
 
 .close-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.25);
 }
 
-/* --- 讓內容與彈窗疊加層正確 --- */
+/* 避免被壓在背景之下 */
 #main, #header {
   z-index: 1;
 }
@@ -95,7 +122,9 @@ nav ul li {
 
 <body>
 
-<!-- Header（維持 Dimension 官方結構） -->
+<!-- ===========================
+     🔥 頁面 header（保留官方結構）
+=========================== -->
 <header id="header">
   <div class="content">
     <div class="inner">
@@ -104,7 +133,7 @@ nav ul li {
     </div>
   </div>
 
-  <!-- 🔥 導覽列：已自動置中 + 白字 -->
+  <!-- 🔥 導覽列（中間置中 + 鑽石排版 + 白字） -->
   <nav>
     <ul>
       <li><a href="#" onclick="openModal('intro')">關於佳咊</a></li>
@@ -115,7 +144,9 @@ nav ul li {
   </nav>
 </header>
 
-<!-- 🔥 玻璃彈窗 -->
+<!-- ===========================
+     🔥 彈窗
+=========================== -->
 <div class="modal" id="modalBox">
   <div class="modal-header" id="modalTitle">標題</div>
   <div class="modal-image"><img id="modalImage" src=""></div>
@@ -124,7 +155,7 @@ nav ul li {
 </div>
 
 <script>
-/* --- 你可在這裡放入各頁內容（文字 + 個別圖片） --- */
+/* 各模組內容 */
 const modalData = {
   intro: {
     title: '關於佳咊',
@@ -133,7 +164,7 @@ const modalData = {
   },
   work: {
     title: '服務內容',
-    img: 'https://raw.githubusercontent.com/Willa-oceanwei/chiahe/main/assets/images//modalData.work.img.jpg',
+    img: 'https://raw.githubusercontent.com/Willa-oceanwei/chiahe/main/assets/images/modalData.work.img.jpg',
     content: '服務內容介紹...'
   },
   about: {
@@ -152,7 +183,6 @@ function openModal(key) {
   document.getElementById('modalTitle').innerHTML = modalData[key].title;
   document.getElementById('modalImage').src = modalData[key].img;
   document.getElementById('modalContent').innerHTML = modalData[key].content;
-
   document.getElementById('modalBox').style.display = 'block';
 }
 
