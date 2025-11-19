@@ -37,48 +37,14 @@ body {
 }
 
 /* 圓形鑽石 */
-.logo-wrapper {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 0;
-  opacity: 0;
-  animation: logoFadeIn 1s 0.7s forwards;
-}
-.logo-circle {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background: rgba(0,0,0,0.3);
-  border: 2px solid #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.diamond-shape {
-  width: 50px;
-  height: 50px;
-  border: 3px solid #fff;
-  background: transparent;
-  transform: rotate(45deg) !important;
-}
+.logo-wrapper { display: flex; justify-content: center; margin-bottom: 0; opacity: 0; animation: logoFadeIn 1s 0.7s forwards; }
+.logo-circle { width: 120px; height: 120px; border-radius: 50%; background: rgba(0,0,0,0.3); border: 2px solid #fff; display: flex; justify-content: center; align-items: center; }
+.diamond-shape { width: 50px; height: 50px; border: 3px solid #fff; background: transparent; transform: rotate(45deg) !important; }
 
 /* 標題 */
-header .content .inner {
-  text-align: center;
-  margin: 20px 0;
-  opacity: 0;
-  animation: titleFadeIn 1s 1s forwards;
-}
-header .content .inner h1 {
-  color: #fff;
-  font-size: 48px;
-  margin: 0;
-}
-header .content .inner p {
-  color: #fff;
-  font-size: 24px;
-  margin-top: 10px;
-}
+header .content .inner { text-align: center; margin: 20px 0; opacity: 0; animation: titleFadeIn 1s 1s forwards; }
+header .content .inner h1 { color: #fff; font-size: 48px; margin: 0; }
+header .content .inner p { color: #fff; font-size: 24px; margin-top: 10px; }
 
 /* T 字導覽列 */
 nav {
@@ -108,33 +74,7 @@ nav ul.t-nav li a {
   display: block;
   transition: 0.3s;
 }
-nav ul.t-nav li a:hover {
-  text-shadow: 0 0 5px rgba(255,255,255,0.7);
-}
-
-/* 下排四欄功能列 */
-.bottom-buttons {
-  width: 60%;
-  margin: 40px auto 60px auto;
-  display: flex;
-  justify-content: space-between;
-}
-.bottom-buttons button {
-  flex: 1;
-  margin: 0 5px;
-  padding: 12px 0;
-  font-size: 16px;
-  font-weight: bold;
-  border-radius: 6px;
-  border: 2px solid #fff;
-  background: rgba(255,255,255,0.85);
-  color: #222;
-  cursor: pointer;
-  transition: 0.3s;
-}
-.bottom-buttons button:hover {
-  background: rgba(255,255,255,1);
-}
+nav ul.t-nav li a:hover { text-shadow: 0 0 5px rgba(255,255,255,0.7); }
 
 /* 玻璃彈窗 */
 .modal {
@@ -154,45 +94,18 @@ nav ul.t-nav li a:hover {
   transition: opacity 0.3s ease, transform 0.3s ease;
   display: none;
 }
-.modal.show {
-  display: block;
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
-}
+.modal.show { display: block; opacity: 1; transform: translate(-50%, -50%) scale(1); }
 
 /* 彈窗標題 */
-.modal-header {
-  font-size: 28px;
-  color: #fff;
-  text-align: left;
-  font-weight: 700;
-  padding-bottom: 10px;
-  border-bottom: 2px solid rgba(255,255,255,0.25);
-  margin-bottom: 20px;
-}
+.modal-header { font-size: 28px; color: #fff; text-align: left; font-weight: 700; padding-bottom: 10px; border-bottom: 2px solid rgba(255,255,255,0.25); margin-bottom: 20px; }
 
 /* 彈窗內容 */
-.modal-content {
-  font-size: 18px;
-  color: #fff;
-  line-height: 1.6;
-  text-align: left;
-  margin-bottom: 20px;
-}
+.modal-content { font-size: 18px; color: #fff; line-height: 1.6; text-align: left; margin-bottom: 20px; }
 
-/* 聯絡我們表單 */
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  width: 100%;
-}
-.contact-form .form-row {
-  display: flex;
-  gap: 15px;
-}
-.contact-form input,
-.contact-form textarea {
+/* 聯絡表單 — Dimension 官網排版 */
+.contact-form { display: flex; flex-direction: column; gap: 15px; width: 100%; }
+.contact-form .form-row { display: flex; gap: 15px; }
+.contact-form input, .contact-form textarea {
   padding: 10px;
   border-radius: 6px;
   border: 2px solid #fff;
@@ -205,7 +118,8 @@ nav ul.t-nav li a:hover {
 .contact-form .button-group {
   display: flex;
   gap: 15px;
-  width: 100%;
+  justify-content: flex-start;
+  width: 60%; /* 與 T 字導覽對齊 */
 }
 .contact-form .button-group button {
   flex: 1;
@@ -215,26 +129,11 @@ nav ul.t-nav li a:hover {
   border: 2px solid #fff;
   cursor: pointer;
 }
-.contact-form button#submitBtn {
-  background: rgba(255,255,240,0.85);
-  color: #222;
-}
-.contact-form button#resetBtn {
-  background: #222;
-  color: #fff;
-}
+.contact-form #submitBtn { background: rgba(255,255,240,0.85); color: #222; } /* 米白半透明 + 深灰文字 */
+.contact-form #resetBtn { background: #222; color: #fff; } /* 黑底白字 */
 
 /* 關閉按鈕 */
-.close-btn {
-  margin-top: 20px;
-  padding: 10px 25px;
-  font-size: 16px;
-  border-radius: 10px;
-  border: 2px solid rgba(255,255,255,0.5);
-  background: rgba(255,255,255,0.15);
-  color: #fff;
-  cursor: pointer;
-}
+.close-btn { margin-top: 20px; padding: 10px 25px; font-size: 16px; border-radius: 10px; border: 2px solid rgba(255,255,255,0.5); background: rgba(255,255,255,0.15); color: #fff; cursor: pointer; }
 .close-btn:hover { background: rgba(255,255,255,0.3); }
 
 /* 背景霧化遮罩 */
@@ -273,7 +172,7 @@ nav ul.t-nav li a:hover {
     </div>
   </div>
 
-  <nav id="topNav">
+  <nav>
     <ul class="t-nav">
       <li><a href="#" onclick="openModal('intro')">關於佳咊</a></li>
       <li><a href="#" onclick="openModal('work')">服務內容</a></li>
@@ -283,18 +182,8 @@ nav ul.t-nav li a:hover {
   </nav>
 </header>
 
-<!-- 下排四欄功能列 -->
-<div class="bottom-buttons">
-  <button onclick="openModal('intro')">關於佳咊</button>
-  <button onclick="openModal('work')">服務內容</button>
-  <button onclick="openModal('about')">產品介紹</button>
-  <button onclick="openModal('contact')">聯絡我們</button>
-</div>
-
-<!-- 背景遮罩 -->
 <div id="overlay"></div>
 
-<!-- 玻璃彈窗 -->
 <div class="modal" id="modalBox">
   <div class="modal-header" id="modalTitle">標題</div>
   <div class="modal-content" id="modalContent">內容文字</div>
@@ -314,6 +203,7 @@ function openModal(key){
   const modal = document.getElementById('modalBox');
   const overlay = document.getElementById('overlay');
   const formContainer = document.getElementById('contactFormContainer');
+  const nav = document.querySelector('nav');
 
   document.getElementById('modalTitle').innerHTML = modalData[key].title;
   document.getElementById('modalContent').innerHTML = modalData[key].content;
@@ -334,18 +224,17 @@ function openModal(key){
     `;
   } else { formContainer.innerHTML = ''; }
 
+  if(nav) nav.style.visibility = 'hidden'; // 彈窗開啟隱藏 T 字
   overlay.style.display = 'block';
   modal.style.display = 'block';
-  requestAnimationFrame(()=>{
-    overlay.classList.add('show');
-    modal.classList.add('show');
-  });
+  requestAnimationFrame(()=>{ overlay.classList.add('show'); modal.classList.add('show'); });
 }
 
 function closeModal(){
   const modal = document.getElementById('modalBox');
   const overlay = document.getElementById('overlay');
   const formContainer = document.getElementById('contactFormContainer');
+  const nav = document.querySelector('nav');
 
   modal.classList.remove('show');
   overlay.classList.remove('show');
@@ -354,19 +243,11 @@ function closeModal(){
     modal.style.display = 'none';
     overlay.style.display = 'none';
     formContainer.innerHTML = '';
+    if(nav) nav.style.visibility = 'visible'; // 彈窗關閉恢復 T 字
   }, 300);
 }
 
 document.getElementById('overlay').onclick = closeModal;
-
-// 初始 hash 跳轉處理
-window.addEventListener('load', ()=>{
-  const hash = location.hash.replace('#','');
-  if(hash && modalData[hash]){
-    openModal(hash);
-  }
-});
 </script>
-
 </body>
 </html>
