@@ -5,54 +5,93 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>佳咊實業有限公司</title>
 
-<!-- Dimension 官方 CSS -->
+<!-- HTML5UP Dimension 原始 CSS -->
 <link rel="stylesheet" href="https://html5up.net/uploads/demos/dimension/assets/css/main.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
 /* --- 全站背景 --- */
 body {
-  background: url("assets/images/neom-SUIMrEKVOXc-unsplash.jpg") no-repeat center center fixed;
+  background: url("https://raw.githubusercontent.com/Willa-oceanwei/chiahe/main/assets/images/neom-SUIMrEKVOXc-unsplash.jpg") no-repeat center center fixed;
   background-size: cover;
+  font-family: 'Arial', sans-serif;
+  margin: 0;
 }
 
-/* --- 中央鑽石內容置中範圍（與 Dimension 官網一致） --- */
-#header .content {
-  max-width: 45%;
-  margin: 0 auto;
+/* --- Header --- */
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 0 40px;
+  border-top: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
-/* --- 標題 & 副標題 --- */
-#header h1 {
-  color: white;
-  font-size: 42px;
-  letter-spacing: 2px;
-}
-#header p {
-  color: white;
-  font-size: 20px;
-  opacity: 0.9;
-}
-
-/* --- 導覽列永遠白字 + 去除底色 --- */
-nav ul li a {
-  color: #ffffff !important;
-  background: none !important;
-  border: none !important;
-  box-shadow: none !important;
-}
-
-/* --- 導覽列置中對齊（與 Dimension 原版一致） --- */
-nav {
-  width: 45%;
-  margin: 0 auto;
-}
-nav ul {
+/* --- Logo 圓形鑽石 --- */
+header .logo {
+  width: 80px;
+  height: 80px;
+  border: 2px solid #fff;
+  border-radius: 50%;
   display: flex;
   justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
 }
+
+header .logo span {
+  font-size: 1.8rem;
+  color: #fff;
+}
+
+/* --- Header 文字 --- */
+header .content .inner h1 {
+  font-size: 48px;
+  color: #fff;
+  margin: 0;
+  font-weight: bold;
+}
+header .content .inner p {
+  font-size: 26px;
+  color: #fff;
+  margin-top: 10px;
+}
+
+/* --- 導覽列置中 --- */
+nav {
+  width: 50%; /* 兩側各留 25% */
+  margin: 20px auto 0;
+}
+
+nav ul {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
 nav ul li {
-  padding: 0 25px;
-  text-align: center;
+  flex: 1;                /* 四個欄位平均寬度 */
+  text-align: center;     /* 文字置中 */
+}
+
+nav ul li a {
+  color: #fff !important;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 0;
+  display: block;
+  transition: 0.3s;
+}
+
+nav ul li a:hover {
+  text-shadow: 0 0 5px rgba(255,255,255,0.7);
 }
 
 /* --- 玻璃彈窗 --- */
@@ -60,36 +99,36 @@ nav ul li {
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 55%;
+  width: 60%;
+  max-width: 800px;
   transform: translate(-50%, -50%);
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(12px);
-  padding: 40px;
+  background: rgba(40,40,40,0.85);
+  backdrop-filter: blur(20px);
   border-radius: 16px;
+  padding: 30px 40px;
   text-align: center;
+  color: #fff;
   z-index: 9999;
   display: none;
 }
 
-/* 標題 */
 .modal-header {
   font-size: 28px;
+  font-weight: bold;
   margin-bottom: 20px;
-  color: #fff;
 }
 
-/* 圖片：寬 80%，高度自動 */
+/* 圖片占彈窗 80% */
 .modal-image img {
   width: 80%;
-  height: auto;
+  height: 30%;
+  object-fit: contain;
   border-radius: 10px;
   margin-bottom: 20px;
 }
 
-/* 內容文字 */
 .modal-content {
-  font-size: 18px;
-  color: #fff;
+  font-size: 16px;
   line-height: 1.6;
 }
 
@@ -99,29 +138,59 @@ nav ul li {
   padding: 10px 25px;
   font-size: 16px;
   border-radius: 10px;
-  border: 2px solid rgba(255, 255, 255, 0.5);
-  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.15);
   color: #fff;
   cursor: pointer;
 }
 .close-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255,255,255,0.3);
+}
+
+/* --- Contact 表單樣式 --- */
+.modal-content form div {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.modal-content input, .modal-content textarea {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-radius: 4px;
+}
+
+.modal-content button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background: #fff;
+  color: #000;
+}
+
+.modal-content .social-icons {
+  margin-top: 20px;
+}
+
+.modal-content .social-icons a {
+  margin: 0 10px;
+  color: #fff;
+  font-size: 1.4rem;
 }
 </style>
 </head>
 
 <body>
 
-<!-- Header -->
-<header id="header">
+<header>
+  <div class="logo"><span class="fas fa-gem"></span></div>
   <div class="content">
     <div class="inner">
       <h1>佳咊實業有限公司</h1>
-      <p>你的色彩 · 獨一無二</p>
+      <p>高品質色粉供應商</p>
     </div>
   </div>
-
-  <!-- 導覽列 -->
   <nav>
     <ul>
       <li><a href="#" onclick="openModal('intro')">關於佳咊</a></li>
@@ -132,7 +201,7 @@ nav ul li {
   </nav>
 </header>
 
-<!-- 彈窗 -->
+<!-- 玻璃彈窗 -->
 <div class="modal" id="modalBox">
   <div class="modal-header" id="modalTitle">標題</div>
   <div class="modal-image"><img id="modalImage" src=""></div>
@@ -141,27 +210,50 @@ nav ul li {
 </div>
 
 <script>
-/* --- 各頁內容 --- */
 const modalData = {
   intro: {
     title: '關於佳咊',
-    img: 'assets/images/company.jpg',
-    content: '佳咊實業是專業的色粉供應商...'
+    img: 'https://raw.githubusercontent.com/Willa-oceanwei/chiahe/main/assets/images/about.jpg',
+    content: '佳咊實業成立於 1990 年，專注於色粉、顏料與色彩應用開發。我們致力於提供穩定品質、創新配方與客製化服務。'
   },
   work: {
     title: '服務內容',
-    img: 'https://raw.githubusercontent.com/Willa-oceanwei/chiahe/main/assets/images/modalData.work.img.jpg',
-    content: '我們提供客製化調色、生產與技術支援...'
+    img: 'https://raw.githubusercontent.com/Willa-oceanwei/chiahe/main/assets/images/majid-abparvar-work.jpg',
+    content: '・塑膠色粉調色\n・Pantone 色號比對服務\n・客製化顏色研發\n・技術諮詢與色彩管理'
   },
   about: {
     title: '產品介紹',
-    img: 'assets/images/products.jpg',
-    content: '專業色粉、塑膠母粒、Pantone 色票比對...'
+    img: 'https://raw.githubusercontent.com/Willa-oceanwei/chiahe/main/assets/images/products.jpg',
+    content: '・PE 色母\n・PP 色母\n・透明色粉\n・金屬色粉\n・特殊效果顏料（珠光、螢光、金蔥）'
   },
   contact: {
     title: '聯絡我們',
-    img: 'assets/images/contact.jpg',
-    content: '電話：xxx-xxx<br>地址：xxx'
+    img: 'https://raw.githubusercontent.com/Willa-oceanwei/chiahe/main/assets/images/contact.jpg',
+    content: `
+      <form>
+        <div>
+          <label>姓名</label><br>
+          <input type="text" name="name" required>
+        </div>
+        <div>
+          <label>電子郵件</label><br>
+          <input type="email" name="email" required>
+        </div>
+        <div>
+          <label>訊息</label><br>
+          <textarea name="message" rows="4" required></textarea>
+        </div>
+        <div>
+          <button type="submit">送出</button>
+        </div>
+      </form>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-github"></i></a>
+      </div>
+    `
   }
 };
 
@@ -169,7 +261,6 @@ function openModal(key) {
   document.getElementById('modalTitle').innerHTML = modalData[key].title;
   document.getElementById('modalImage').src = modalData[key].img;
   document.getElementById('modalContent').innerHTML = modalData[key].content;
-
   document.getElementById('modalBox').style.display = 'block';
 }
 
