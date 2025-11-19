@@ -114,6 +114,31 @@ nav ul.t-nav li a:hover {
   text-shadow: 0 0 5px rgba(255,255,255,0.7);
 }
 
+/* 下方四個按鈕 */
+.bottom-buttons {
+  width: 60%; /* 與 T 字導覽列同寬 */
+  margin: 30px auto; /* 置中 */
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+.bottom-buttons button {
+  flex: 1;
+  max-width: 140px; /* 每個按鈕略窄 */
+  padding: 10px 0;
+  border-radius: 6px;
+  font-weight: bold;
+  border: 2px solid #fff;
+  background: rgba(255,255,255,0.85);
+  color: #000;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.bottom-buttons button:hover {
+  background: #fff;
+  color: #111;
+}
+
 /* 玻璃彈窗 */
 .modal {
   position: fixed;
@@ -147,16 +172,6 @@ nav ul.t-nav li a:hover {
   padding-bottom: 10px;
   border-bottom: 2px solid rgba(255,255,255,0.25);
   margin-bottom: 20px;
-}
-
-/* 彈窗圖片 */
-.modal-image {
-  text-align: center;
-  margin: 20px 0;
-}
-.modal-image img {
-  max-width: 80%;
-  border-radius: 8px;
 }
 
 /* 彈窗內容 */
@@ -206,7 +221,7 @@ nav ul.t-nav li a:hover {
   cursor: pointer;
 }
 .contact-form button#submitBtn {
-  background-color: rgba(255, 255, 255, 0.85) !important;
+  background-color: rgba(255, 255, 255, 0.85);
   color: #000 !important; 
 }
 .contact-form button#resetBtn {
@@ -278,11 +293,19 @@ nav ul.t-nav li a:hover {
   </nav>
 </header>
 
+<!-- 下方四個按鈕 -->
+<div class="bottom-buttons">
+  <button onclick="openModal('intro')">關於佳咊</button>
+  <button onclick="openModal('work')">服務內容</button>
+  <button onclick="openModal('about')">產品介紹</button>
+  <button onclick="openModal('contact')">聯絡我們</button>
+</div>
+
 <div id="overlay"></div>
 
 <div class="modal" id="modalBox">
   <div class="modal-header" id="modalTitle">標題</div>
-  <div id="modalContent">內容文字</div>
+  <div class="modal-content" id="modalContent">內容文字</div>
   <div id="contactFormContainer"></div>
   <button class="close-btn" onclick="closeModal()">關閉</button>
 </div>
@@ -291,18 +314,15 @@ nav ul.t-nav li a:hover {
 const modalData = {
   intro: {
     title: '關於佳咊',
-    content: '佳咊實業成立於1990年，專注於色粉、顏料與色彩應用開發。我們致力於提供穩定品質、創新配方與客製化服務。',
-    img: 'https://raw.githubusercontent.com/Willa-oceanwei/chiahe/main/assets/images/sample1.jpg'
+    content: '佳咊實業成立於1990年，專注於色粉、顏料與色彩應用開發。我們致力於提供穩定品質、創新配方與客製化服務。'
   },
   work: {
     title: '服務內容',
-    content: '・塑膠色粉調色  ・Pantone 色號比對  ・客製化顏色研發  ・技術諮詢與色彩管理',
-    img: 'https://raw.githubusercontent.com/Willa-oceanwei/chiahe/main/assets/images/sample2.jpg'
+    content: '・塑膠色粉調色  ・Pantone 色號比對  ・客製化顏色研發  ・技術諮詢與色彩管理'
   },
   about: {
     title: '產品介紹',
-    content: '我們提供： PE色母、PP色母、透明色粉、金屬色粉、特殊效果顏料（珠光、螢光、金蔥）',
-    img: 'https://raw.githubusercontent.com/Willa-oceanwei/chiahe/main/assets/images/sample3.jpg'
+    content: '我們提供： PE色母、PP色母、透明色粉、金屬色粉、特殊效果顏料（珠光、螢光、金蔥）'
   },
   contact: {
     title: '聯絡我們',
@@ -314,24 +334,11 @@ function openModal(key){
   const modal = document.getElementById('modalBox');
   const overlay = document.getElementById('overlay');
   const formContainer = document.getElementById('contactFormContainer');
-  const modalContent = document.getElementById('modalContent');
   const nav = document.querySelector('nav');
 
   document.getElementById('modalTitle').innerHTML = modalData[key].title;
+  document.getElementById('modalContent').innerHTML = modalData[key].content;
 
-  // 判斷是否要顯示圖片
-  if(modalData[key].img){
-    modalContent.innerHTML = `
-      <div class="modal-image">
-        <img src="${modalData[key].img}" />
-      </div>
-      <div class="modal-text">${modalData[key].content}</div>
-    `;
-  } else {
-    modalContent.innerHTML = `<div class="modal-text">${modalData[key].content}</div>`;
-  }
-
-  // 聯絡我們表單
   if(key === 'contact'){
     formContainer.innerHTML = `
       <form class="contact-form">
