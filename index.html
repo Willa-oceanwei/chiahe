@@ -83,17 +83,16 @@ header .content .inner p {
   margin-top: 10px;
 }
 
-/* T 字導覽列 */
+/* T 字導覽列，與官方一致 */
 nav {
-  width: 60%;
+  width: 60%; /* 與官方對齊 */
   margin: 0 auto;
   opacity: 0;
   animation: navFadeIn 1s 1.2s forwards;
-  display: flex;
 }
 nav ul.t-nav {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* 四個項目平均分布 */
   list-style: none;
   padding: 0;
   margin: 0;
@@ -113,30 +112,6 @@ nav ul.t-nav li a {
 }
 nav ul.t-nav li a:hover {
   text-shadow: 0 0 5px rgba(255,255,255,0.7);
-}
-
-/* 下方四個按鈕，對齊上方 T 字導覽 */
-.bottom-buttons {
-  width: 60%; /* 與 nav 一樣寬 */
-  margin: 40px auto 0 auto;
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-}
-.bottom-buttons button {
-  flex: 1; /* 每個按鈕自動平分 */
-  padding: 15px 0;
-  font-size: 18px;
-  font-weight: bold;
-  border: 2px solid #fff;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.15);
-  color: #fff;
-  cursor: pointer;
-  transition: 0.3s;
-}
-.bottom-buttons button:hover {
-  background: rgba(255, 255, 255, 0.3);
 }
 
 /* 玻璃彈窗 */
@@ -183,7 +158,7 @@ nav ul.t-nav li a:hover {
   margin-bottom: 20px;
 }
 
-/* 聯絡我們表單 — Dimension 官網排版 */
+/* 聯絡我們表單 */
 .contact-form {
   display: flex;
   flex-direction: column;
@@ -204,9 +179,7 @@ nav ul.t-nav li a:hover {
   color: #fff;
   flex: 1;
 }
-.contact-form textarea {
-  width: 100%;
-}
+.contact-form textarea { width: 100%; }
 .contact-form .button-group {
   display: flex;
   gap: 15px;
@@ -294,14 +267,6 @@ nav ul.t-nav li a:hover {
     </ul>
   </nav>
 </header>
-
-<!-- 下方四個按鈕 -->
-<div class="bottom-buttons">
-  <button onclick="openModal('intro')">關於佳咊</button>
-  <button onclick="openModal('work')">服務內容</button>
-  <button onclick="openModal('about')">產品介紹</button>
-  <button onclick="openModal('contact')">聯絡我們</button>
-</div>
 
 <div id="overlay"></div>
 
