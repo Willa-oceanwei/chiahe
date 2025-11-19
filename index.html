@@ -1,113 +1,312 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>佳咊實業有限公司</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>佳咊實業有限公司</title>
 
-  <!-- Dimension 官方 CSS -->
-  <link rel="stylesheet" href="https://html5up.net/uploads/demos/dimension/assets/css/main.css" />
+<!-- 官方 Dimension CSS -->
+<link rel="stylesheet" href="https://html5up.net/uploads/demos/dimension/assets/css/main.css" />
 
-  <noscript>
-    <link rel="stylesheet" href="https://html5up.net/uploads/demos/dimension/assets/css/noscript.css" />
-  </noscript>
+<style>
+/* 全站背景 */
+body {
+  background: url("https://raw.githubusercontent.com/Willa-oceanwei/chiahe/main/assets/images/neom-SUIMrEKVOXc-unsplash.jpg") no-repeat center center fixed;
+  background-size: cover;
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  opacity: 0;
+  animation: fadeIn 1.5s forwards;
+}
 
-  <style>
-    /* ====== 自訂：左對齊、粗體、底線 ====== */
-    h1.custom-title {
-      text-align: left !important;
-      font-weight: 900 !important;
-      font-size: 2.2em;
-      border-bottom: 3px solid #fff;
-      padding-bottom: 6px;
-      width: fit-content;
-    }
+/* 背景淡入動畫 */
+@keyframes fadeIn { to { opacity: 1; } }
 
-    /* ====== 自訂：讓背景維持 Dimension 官方比例 ====== */
-    #bg {
-      background-size: cover !important;
-      background-position: center !important;
-      background-attachment: fixed !important;
-    }
+/* Header */
+#header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 80px;
+  z-index: 10;
+  opacity: 0;
+  animation: headerFadeIn 1.5s 0.5s forwards;
+}
 
-    /* ====== 導覽列白字 ====== */
-    #header nav ul li a {
-      color: #ffffff !important;
-      font-weight: 700;
-    }
+/* Header 淡入 */
+@keyframes headerFadeIn { to { opacity: 1; } }
 
-    /* 解決 GitHub Pages 某些 CSS 加載問題 */
-    body.is-preload #wrapper {
-      opacity: 1 !important;
-    }
-  </style>
+/* ★ 修正 logo 不被 Dimension 的 transform 壓扁 */
+.logo-wrapper, 
+.logo-circle, 
+.diamond-shape {
+  transform: none !important;
+}
 
+/* 圓形鑽石 */
+.logo-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0;
+  opacity: 0;
+  animation: logoFadeIn 1s 0.7s forwards;
+}
+.logo-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.3);
+  border: 2px solid #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ★菱形本體（修正版） */
+.diamond-shape {
+  width: 50px;
+  height: 50px;
+  border: 3px solid #fff;
+  background: transparent;
+  transform: rotate(45deg) !important;
+}
+
+/* 標題 */
+header .content .inner {
+  text-align: center;
+  margin: 20px 0;
+  opacity: 0;
+  animation: titleFadeIn 1s 1s forwards;
+}
+header .content .inner h1 {
+  color: #fff;
+  font-size: 48px;
+  margin: 0;
+}
+header .content .inner p {
+  color: #fff;
+  font-size: 24px;
+  margin-top: 10px;
+}
+
+/* T 字導覽列 */
+nav {
+  width: 60%;
+  margin: 0 auto;
+  opacity: 0;
+  animation: navFadeIn 1s 1.2s forwards;
+}
+nav ul.t-nav {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+nav ul.t-nav li {
+  flex: 1;
+  text-align: center;
+}
+nav ul.t-nav li a {
+  color: #fff !important;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 10px 0;
+  display: block;
+  transition: 0.3s;
+}
+nav ul.t-nav li a:hover {
+  text-shadow: 0 0 5px rgba(255,255,255,0.7);
+}
+
+/* 玻璃彈窗 */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 60%;
+  transform: translate(-50%, -50%) scale(0.9);
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(12px);
+  padding: 40px;
+  border-radius: 16px;
+  text-align: center;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  display: none;
+}
+.modal.show {
+  display: block;
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* ★彈幕圖片 — 依官方比例 cover */
+.modal-image img {
+  width: 100%;
+  height: 70vh;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+/* ★彈幕標題 — 左對齊、加粗、底線 */
+.modal-header {
+  font-size: 28px;
+  color: #fff;
+  text-align: left;
+  font-weight: 700;
+  padding-bottom: 10px;
+  border-bottom: 2px solid rgba(255,255,255,0.25);
+  margin-bottom: 20px;
+}
+
+.modal-content {
+  font-size: 18px;
+  color: #fff;
+  line-height: 1.6;
+  text-align: left;
+}
+
+.close-btn {
+  margin-top: 20px;
+  padding: 10px 25px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 2px solid rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  cursor: pointer;
+}
+.close-btn:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+/* ★背景霧化遮罩 */
+#overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.3);
+  backdrop-filter: blur(5px);
+  z-index: 998;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: none;
+}
+#overlay.show {
+  display: block;
+  opacity: 1;
+}
+
+/* Animations */
+@keyframes logoFadeIn { to { opacity: 1; } }
+@keyframes titleFadeIn { to { opacity: 1; } }
+@keyframes navFadeIn { to { opacity: 1; } }
+</style>
 </head>
 
-<body class="is-preload">
-
-  <!-- Wrapper（一定要保留） -->
-  <div id="wrapper">
-
-    <!-- ===== Header（T 型導覽） ===== -->
-    <header id="header">
-      <div class="logo">
-        <span class="icon fa-gem"></span>
-      </div>
-      <div class="content">
-        <div class="inner">
-          <h1 class="custom-title">佳咊實業有限公司</h1>
-          <p>Chia He Industrial Co., Ltd.</p>
-        </div>
-      </div>
-      <nav>
-        <ul>
-          <li><a href="#intro">公司介紹</a></li>
-          <li><a href="#work">產品與服務</a></li>
-          <li><a href="#contact">聯絡我們</a></li>
-        </ul>
-      </nav>
-    </header>
-
-    <!-- ===== Main（Intro / Work） ===== -->
-    <div id="main">
-
-      <!-- Intro -->
-      <article id="intro">
-        <h2 class="major">公司介紹</h2>
-        <p>我們致力於提供專業色粉與配色服務，以精準穩定的品質協助客戶提升生產效率。</p>
-      </article>
-
-      <!-- Work -->
-      <article id="work">
-        <h2 class="major">產品與服務</h2>
-        <p>提供 Pantone 色粉調製、配方管理、技術諮詢等服務。</p>
-      </article>
-
-      <!-- Contact -->
-      <article id="contact">
-        <h2 class="major">聯絡我們</h2>
-        <p>Email：service@chiahe.com.tw</p>
-      </article>
-
+<body>
+<header id="header">
+  <!-- 圓形鑽石 logo -->
+  <div class="logo-wrapper">
+    <div class="logo-circle">
+        <div class="diamond-shape"></div>
     </div>
-
-    <!-- Footer -->
-    <footer id="footer">
-      <p class="copyright">&copy; 佳咊實業有限公司</p>
-    </footer>
-
   </div>
 
-  <!-- ===== 背景（背景一定要獨立存在） ===== -->
-  <div id="bg"></div>
+  <!-- 標題 -->
+  <div class="content">
+    <div class="inner">
+      <h1>佳咊實業有限公司</h1>
+      <p>你的顏色 獨一無二</p>
+    </div>
+  </div>
 
-  <!-- 官方 JS -->
-  <script src="https://html5up.net/uploads/demos/dimension/assets/js/jquery.min.js"></script>
-  <script src="https://html5up.net/uploads/demos/dimension/assets/js/browser.min.js"></script>
-  <script src="https://html5up.net/uploads/demos/dimension/assets/js/breakpoints.min.js"></script>
-  <script src="https://html5up.net/uploads/demos/dimension/assets/js/util.js"></script>
-  <script src="https://html5up.net/uploads/demos/dimension/assets/js/main.js"></script>
+  <!-- T 字導覽列 -->
+  <nav>
+    <ul class="t-nav">
+      <li><a href="#" onclick="openModal('intro')">關於佳咊</a></li>
+      <li><a href="#" onclick="openModal('work')">服務內容</a></li>
+      <li><a href="#" onclick="openModal('about')">產品介紹</a></li>
+      <li><a href="#" onclick="openModal('contact')">聯絡我們</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- 背景霧化遮罩 -->
+<div id="overlay"></div>
+
+<!-- 玻璃彈窗 -->
+<div class="modal" id="modalBox">
+  <div class="modal-header" id="modalTitle">標題</div>
+  <div class="modal-image"><img id="modalImage" src=""></div>
+  <div class="modal-content" id="modalContent">內容文字</div>
+  <button class="close-btn" onclick="closeModal()">關閉</button>
+</div>
+
+<script>
+/* 彈窗內容 */
+const modalData = {
+  intro: {
+    title: '關於佳咊',
+    img: 'https://raw.githubusercontent.com/Willa-oceanwei/chiahe/main/assets/images/about.jpg',
+    content: '佳咊實業成立於1990年，專注於色粉、顏料與色彩應用開發。我們致力於提供穩定品質、創新配方與客製化服務。'
+  },
+  work: {
+    title: '服務內容',
+    img: 'https://raw.githubusercontent.com/Willa-oceanwei/chiahe/main/assets/images/modalData.work.img.jpg',
+    content: '・塑膠色粉調色  ・Pantone 色號比對  ・客製化顏色研發  ・技術諮詢與色彩管理'
+  },
+  about: {
+    title: '產品介紹',
+    img: 'https://raw.githubusercontent.com/Willa-oceanwei/chiahe/main/assets/images/products.jpg',
+    content: '我們提供： PE色母、PP色母、透明色粉、金屬色粉、特殊效果顏料（珠光、螢光、金蔥）'
+  },
+  contact: {
+    title: '聯絡我們',
+    img: 'https://raw.githubusercontent.com/Willa-oceanwei/chiahe/main/assets/images/contact.jpg',
+    content: `佳咊實業有限公司<br>📍 台南市永康區中正南路309號<br>☎ 06-2536526<br>📧 service@chiahe.com.tw`
+  }
+};
+
+/* 打開彈窗 */
+function openModal(key) {
+  const modal = document.getElementById('modalBox');
+  const overlay = document.getElementById('overlay');
+
+  document.getElementById('modalTitle').innerHTML = modalData[key].title;
+  document.getElementById('modalImage').src = modalData[key].img;
+  document.getElementById('modalContent').innerHTML = modalData[key].content;
+
+  overlay.style.display = 'block';
+  modal.style.display = 'block';
+
+  requestAnimationFrame(() => {
+    overlay.classList.add('show');
+    modal.classList.add('show');
+  });
+}
+
+/* 關閉彈窗 */
+function closeModal() {
+  const modal = document.getElementById('modalBox');
+  const overlay = document.getElementById('overlay');
+
+  modal.classList.remove('show');
+  overlay.classList.remove('show');
+
+  setTimeout(() => {
+    modal.style.display = 'none';
+    overlay.style.display = 'none';
+  }, 300);
+}
+
+document.getElementById('overlay').onclick = closeModal;
+</script>
 
 </body>
 </html>
