@@ -120,34 +120,108 @@ nav ul li a:hover {
 <body>
 
 <header id="header">
-  <!-- 圓形 logo 與鑽石直接相連 -->
-  <div class="logo"><span class="icon fa-gem"></span></div>
+  <!-- 圓形鑽石 logo -->
+  <div class="logo-wrapper">
+    <div class="logo-circle">
+      <span class="icon fa-gem"></span>
+    </div>
+  </div>
 
+  <!-- 標題 -->
   <div class="content">
     <div class="inner">
       <h1>佳咊實業有限公司</h1>
-      <p>你的色彩 獨一無二</p>
+      <p>你的顏色 獨一無二</p>
     </div>
   </div>
 
   <!-- T 字導覽列 -->
   <nav>
-    <ul>
+    <ul class="t-nav">
       <li><a href="#" onclick="openModal('intro')">關於佳咊</a></li>
       <li><a href="#" onclick="openModal('work')">服務內容</a></li>
       <li><a href="#" onclick="openModal('about')">產品介紹</a></li>
       <li><a href="#" onclick="openModal('contact')">聯絡我們</a></li>
     </ul>
   </nav>
-
-  <!-- 下方四格按鈕 -->
-  <div class="bottom-buttons">
-    <div class="btn">Intro</div>
-    <div class="btn">Work</div>
-    <div class="btn">About</div>
-    <div class="btn">Contact</div>
-  </div>
 </header>
+
+<style>
+/* header 基本 */
+#header {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 40px;
+  z-index: 10;
+}
+
+/* 圓形鑽石 */
+.logo-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px; /* 與 T 字間距 */
+}
+.logo-circle {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255,255,255,0.05);
+}
+.logo-circle .icon {
+  font-size: 36px;
+  color: #fff;
+}
+
+/* 標題 */
+header .content .inner {
+  text-align: center;
+  margin-bottom: 30px;
+}
+header .content .inner h1 {
+  color: #fff;
+  font-size: 48px;
+  margin: 0;
+}
+header .content .inner p {
+  color: #fff;
+  font-size: 24px;
+  margin-top: 10px;
+}
+
+/* T 字導覽列 */
+nav {
+  width: 50%; /* 控制 T 字寬度 */
+  margin: 0 auto;
+}
+nav ul.t-nav {
+  display: flex;
+  justify-content: space-between; /* 等分四格 */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+nav ul.t-nav li {
+  flex: 1;
+  text-align: center; /* 文字置中 */
+}
+nav ul.t-nav li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 10px 0;
+  display: block;
+  transition: 0.3s;
+}
+nav ul.t-nav li a:hover {
+  text-shadow: 0 0 5px rgba(255,255,255,0.7);
+}
+</style>
+
 
 <style>
 /* --- 圓形 logo 與鑽石 --- */
