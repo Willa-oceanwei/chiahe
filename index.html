@@ -18,8 +18,6 @@ body {
   opacity: 0;
   animation: fadeIn 1.5s forwards;
 }
-
-/* 背景淡入動畫 */
 @keyframes fadeIn { to { opacity: 1; } }
 
 /* Header */
@@ -32,8 +30,6 @@ body {
   opacity: 0;
   animation: headerFadeIn 1.5s 0.5s forwards;
 }
-
-/* Header 淡入 */
 @keyframes headerFadeIn { to { opacity: 1; } }
 
 /* ★ 修正 logo 不被 Dimension 的 transform 壓扁 */
@@ -61,7 +57,6 @@ body {
   justify-content: center;
   align-items: center;
 }
-
 /* ★菱形本體（修正版） */
 .diamond-shape {
   width: 50px;
@@ -143,10 +138,10 @@ nav ul.t-nav li a:hover {
   transform: translate(-50%, -50%) scale(1);
 }
 
-/* ★彈幕圖片 — 依官方比例 cover */
+/* ★彈幕圖片 — 官方比例，不佔滿整個畫面 */
 .modal-image img {
   width: 100%;
-  height: 70vh;
+  height: 50vh;  /* 調整高度 */
   object-fit: cover;
   object-position: center;
   border-radius: 10px;
@@ -171,6 +166,37 @@ nav ul.t-nav li a:hover {
   text-align: left;
 }
 
+/* 聯絡表單 */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 15px;
+}
+.contact-form input,
+.contact-form textarea {
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  font-size: 16px;
+}
+.contact-form button {
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+}
+.contact-form button#submitBtn {
+  background-color: #28a745;
+  color: #fff;
+}
+.contact-form button#resetBtn {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+/* 關閉按鈕 */
 .close-btn {
   margin-top: 20px;
   padding: 10px 25px;
@@ -185,7 +211,7 @@ nav ul.t-nav li a:hover {
   background: rgba(255,255,255,0.3);
 }
 
-/* ★背景霧化遮罩 */
+/* 背景霧化遮罩 */
 #overlay {
   position: fixed;
   top: 0; left: 0;
@@ -245,6 +271,7 @@ nav ul.t-nav li a:hover {
   <div class="modal-header" id="modalTitle">標題</div>
   <div class="modal-image"><img id="modalImage" src=""></div>
   <div class="modal-content" id="modalContent">內容文字</div>
+  <div id="contactFormContainer"></div>
   <button class="close-btn" onclick="closeModal()">關閉</button>
 </div>
 
@@ -269,7 +296,7 @@ const modalData = {
   contact: {
     title: '聯絡我們',
     img: 'https://raw.githubusercontent.com/Willa-oceanwei/chiahe/main/assets/images/contact.jpg',
-    content: `佳咊實業有限公司<br>📍 台南市永康區中正南路309號<br>☎ 06-2536526<br>📧 service@chiahe.com.tw`
+    content: ''
   }
 };
 
@@ -277,10 +304,28 @@ const modalData = {
 function openModal(key) {
   const modal = document.getElementById('modalBox');
   const overlay = document.getElementById('overlay');
+  const formContainer = document.getElementById('contactFormContainer');
 
   document.getElementById('modalTitle').innerHTML = modalData[key].title;
   document.getElementById('modalImage').src = modalData[key].img;
   document.getElementById('modalContent').innerHTML = modalData[key].content;
+
+  // 如果是聯絡表單，生成表單
+  if(key === 'contact'){
+    formContainer.innerHTML = `
+      <form class="contact-form">
+        <input type="text" placeholder="姓名" required />
+        <input type="email" placeholder="Email" required />
+        <textarea placeholder="訊息" rows="4" required></textarea>
+        <div style="display:flex; gap:10px;">
+          <button type="submit" id="submitBtn">傳送</button>
+          <button type="reset" id="resetBtn">重新填寫</button>
+        </div>
+      </form>
+    `;
+  } else {
+    formContainer.innerHTML = '';
+  }
 
   overlay.style.display = 'block';
   modal.style.display = 'block';
@@ -295,6 +340,7 @@ function openModal(key) {
 function closeModal() {
   const modal = document.getElementById('modalBox');
   const overlay = document.getElementById('overlay');
+  const formContainer = document.getElementById('contactFormContainer');
 
   modal.classList.remove('show');
   overlay.classList.remove('show');
@@ -302,6 +348,7 @@ function closeModal() {
   setTimeout(() => {
     modal.style.display = 'none';
     overlay.style.display = 'none';
+    formContainer.innerHTML = '';
   }, 300);
 }
 
