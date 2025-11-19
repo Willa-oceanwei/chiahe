@@ -30,21 +30,58 @@ body {
   opacity: 0;
   animation: headerFadeIn 1.5s 0.5s forwards;
 }
+@keyframes headerFadeIn { to { opacity: 1; } }
 
 /* 禁用 Dimension transform 壓扁 logo */
-.logo-wrapper, .logo-circle, .diamond-shape {
+.logo-wrapper, 
+.logo-circle, 
+.diamond-shape {
   transform: none !important;
 }
 
 /* 圓形鑽石 */
-.logo-wrapper { display: flex; justify-content: center; margin-bottom: 0; opacity: 0; animation: logoFadeIn 1s 0.7s forwards; }
-.logo-circle { width: 120px; height: 120px; border-radius: 50%; background: rgba(0,0,0,0.3); border: 2px solid #fff; display: flex; justify-content: center; align-items: center; }
-.diamond-shape { width: 50px; height: 50px; border: 3px solid #fff; background: transparent; transform: rotate(45deg) !important; }
+.logo-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0;
+  opacity: 0;
+  animation: logoFadeIn 1s 0.7s forwards;
+}
+.logo-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.3);
+  border: 2px solid #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.diamond-shape {
+  width: 50px;
+  height: 50px;
+  border: 3px solid #fff;
+  background: transparent;
+  transform: rotate(45deg) !important;
+}
 
 /* 標題 */
-header .content .inner { text-align: center; margin: 20px 0; opacity: 0; animation: titleFadeIn 1s 1s forwards; }
-header .content .inner h1 { color: #fff; font-size: 48px; margin: 0; }
-header .content .inner p { color: #fff; font-size: 24px; margin-top: 10px; }
+header .content .inner {
+  text-align: center;
+  margin: 20px 0;
+  opacity: 0;
+  animation: titleFadeIn 1s 1s forwards;
+}
+header .content .inner h1 {
+  color: #fff;
+  font-size: 48px;
+  margin: 0;
+}
+header .content .inner p {
+  color: #fff;
+  font-size: 24px;
+  margin-top: 10px;
+}
 
 /* T 字導覽列 */
 nav {
@@ -74,7 +111,9 @@ nav ul.t-nav li a {
   display: block;
   transition: 0.3s;
 }
-nav ul.t-nav li a:hover { text-shadow: 0 0 5px rgba(255,255,255,0.7); }
+nav ul.t-nav li a:hover {
+  text-shadow: 0 0 5px rgba(255,255,255,0.7);
+}
 
 /* 玻璃彈窗 */
 .modal {
@@ -94,18 +133,45 @@ nav ul.t-nav li a:hover { text-shadow: 0 0 5px rgba(255,255,255,0.7); }
   transition: opacity 0.3s ease, transform 0.3s ease;
   display: none;
 }
-.modal.show { display: block; opacity: 1; transform: translate(-50%, -50%) scale(1); }
+.modal.show {
+  display: block;
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
 
 /* 彈窗標題 */
-.modal-header { font-size: 28px; color: #fff; text-align: left; font-weight: 700; padding-bottom: 10px; border-bottom: 2px solid rgba(255,255,255,0.25); margin-bottom: 20px; }
+.modal-header {
+  font-size: 28px;
+  color: #fff;
+  text-align: left;
+  font-weight: 700;
+  padding-bottom: 10px;
+  border-bottom: 2px solid rgba(255,255,255,0.25);
+  margin-bottom: 20px;
+}
 
 /* 彈窗內容 */
-.modal-content { font-size: 18px; color: #fff; line-height: 1.6; text-align: left; margin-bottom: 20px; }
+.modal-content {
+  font-size: 18px;
+  color: #fff;
+  line-height: 1.6;
+  text-align: left;
+  margin-bottom: 20px;
+}
 
-/* 聯絡表單 — Dimension 官網排版 */
-.contact-form { display: flex; flex-direction: column; gap: 15px; width: 100%; }
-.contact-form .form-row { display: flex; gap: 15px; }
-.contact-form input, .contact-form textarea {
+/* 聯絡我們表單 — Dimension 官網排版 */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+.contact-form .form-row {
+  display: flex;
+  gap: 15px;
+}
+.contact-form input,
+.contact-form textarea {
   padding: 10px;
   border-radius: 6px;
   border: 2px solid #fff;
@@ -114,27 +180,47 @@ nav ul.t-nav li a:hover { text-shadow: 0 0 5px rgba(255,255,255,0.7); }
   color: #fff;
   flex: 1;
 }
-.contact-form textarea { width: 100%; }
+.contact-form textarea {
+  width: 100%;
+}
 .contact-form .button-group {
   display: flex;
   gap: 15px;
   justify-content: flex-start;
-  width: 60%; /* 與 T 字導覽對齊 */
 }
 .contact-form .button-group button {
   flex: 1;
-  padding: 12px 0;
+  max-width: 45%;
+  min-width: 100px;
+  padding: 10px;
   border-radius: 6px;
   font-weight: 700;
   border: 2px solid #fff;
   cursor: pointer;
 }
-.contact-form #submitBtn { background: rgba(255,255,240,0.85); color: #222; } /* 米白半透明 + 深灰文字 */
-.contact-form #resetBtn { background: #222; color: #fff; } /* 黑底白字 */
+.contact-form button#submitBtn {
+  background: #fff;
+  color: #000 !important;
+}
+.contact-form button#resetBtn {
+  background: #000;
+  color: #fff !important;
+}
 
 /* 關閉按鈕 */
-.close-btn { margin-top: 20px; padding: 10px 25px; font-size: 16px; border-radius: 10px; border: 2px solid rgba(255,255,255,0.5); background: rgba(255,255,255,0.15); color: #fff; cursor: pointer; }
-.close-btn:hover { background: rgba(255,255,255,0.3); }
+.close-btn {
+  margin-top: 20px;
+  padding: 10px 25px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 2px solid rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  cursor: pointer;
+}
+.close-btn:hover {
+  background: rgba(255,255,255,0.3);
+}
 
 /* 背景霧化遮罩 */
 #overlay {
@@ -148,7 +234,10 @@ nav ul.t-nav li a:hover { text-shadow: 0 0 5px rgba(255,255,255,0.7); }
   transition: opacity 0.3s ease;
   display: none;
 }
-#overlay.show { display: block; opacity: 1; }
+#overlay.show {
+  display: block;
+  opacity: 1;
+}
 
 /* Animations */
 @keyframes logoFadeIn { to { opacity: 1; } }
@@ -193,10 +282,22 @@ nav ul.t-nav li a:hover { text-shadow: 0 0 5px rgba(255,255,255,0.7); }
 
 <script>
 const modalData = {
-  intro: { title: '關於佳咊', content: '佳咊實業成立於1990年，專注於色粉、顏料與色彩應用開發。我們致力於提供穩定品質、創新配方與客製化服務。' },
-  work: { title: '服務內容', content: '・塑膠色粉調色  ・Pantone 色號比對  ・客製化顏色研發  ・技術諮詢與色彩管理' },
-  about: { title: '產品介紹', content: '我們提供： PE色母、PP色母、透明色粉、金屬色粉、特殊效果顏料（珠光、螢光、金蔥）' },
-  contact: { title: '聯絡我們', content: '' }
+  intro: {
+    title: '關於佳咊',
+    content: '佳咊實業成立於1990年，專注於色粉、顏料與色彩應用開發。我們致力於提供穩定品質、創新配方與客製化服務。'
+  },
+  work: {
+    title: '服務內容',
+    content: '・塑膠色粉調色  ・Pantone 色號比對  ・客製化顏色研發  ・技術諮詢與色彩管理'
+  },
+  about: {
+    title: '產品介紹',
+    content: '我們提供： PE色母、PP色母、透明色粉、金屬色粉、特殊效果顏料（珠光、螢光、金蔥）'
+  },
+  contact: {
+    title: '聯絡我們',
+    content: ''
+  }
 };
 
 function openModal(key){
@@ -224,10 +325,13 @@ function openModal(key){
     `;
   } else { formContainer.innerHTML = ''; }
 
-  if(nav) nav.style.visibility = 'hidden'; // 彈窗開啟隱藏 T 字
+  if(nav) nav.style.visibility = 'hidden';
   overlay.style.display = 'block';
   modal.style.display = 'block';
-  requestAnimationFrame(()=>{ overlay.classList.add('show'); modal.classList.add('show'); });
+  requestAnimationFrame(()=>{
+    overlay.classList.add('show');
+    modal.classList.add('show');
+  });
 }
 
 function closeModal(){
@@ -243,11 +347,12 @@ function closeModal(){
     modal.style.display = 'none';
     overlay.style.display = 'none';
     formContainer.innerHTML = '';
-    if(nav) nav.style.visibility = 'visible'; // 彈窗關閉恢復 T 字
+    if(nav) nav.style.visibility = 'visible';
   }, 300);
 }
 
 document.getElementById('overlay').onclick = closeModal;
 </script>
+
 </body>
 </html>
