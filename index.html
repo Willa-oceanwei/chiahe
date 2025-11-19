@@ -36,6 +36,13 @@ body {
 /* Header 淡入 */
 @keyframes headerFadeIn { to { opacity: 1; } }
 
+/* ★ 修正 logo 不被 Dimension 的 transform 壓扁 */
+.logo-wrapper, 
+.logo-circle, 
+.diamond-shape {
+  transform: none !important;
+}
+
 /* 圓形鑽石 */
 .logo-wrapper {
   display: flex;
@@ -54,13 +61,14 @@ body {
   justify-content: center;
   align-items: center;
 }
-/* 菱形本體 */
+
+/* ★菱形本體（修正版） */
 .diamond-shape {
   width: 50px;
   height: 50px;
   border: 3px solid #fff;
-  transform: rotate(45deg);
   background: transparent;
+  transform: rotate(45deg) !important;
 }
 
 /* 標題 */
@@ -134,22 +142,35 @@ nav ul.t-nav li a:hover {
   opacity: 1;
   transform: translate(-50%, -50%) scale(1);
 }
-.modal-header {
-  font-size: 28px;
-  margin-bottom: 20px;
-  color: #fff;
-}
+
+/* ★彈幕圖片 — 依官方比例 cover */
 .modal-image img {
-  width: 80%;
-  height: auto;
+  width: 100%;
+  height: 70vh;
+  object-fit: cover;
+  object-position: center;
   border-radius: 10px;
   margin-bottom: 20px;
 }
+
+/* ★彈幕標題 — 左對齊、加粗、底線 */
+.modal-header {
+  font-size: 28px;
+  color: #fff;
+  text-align: left;
+  font-weight: 700;
+  padding-bottom: 10px;
+  border-bottom: 2px solid rgba(255,255,255,0.25);
+  margin-bottom: 20px;
+}
+
 .modal-content {
   font-size: 18px;
   color: #fff;
   line-height: 1.6;
+  text-align: left;
 }
+
 .close-btn {
   margin-top: 20px;
   padding: 10px 25px;
@@ -164,7 +185,7 @@ nav ul.t-nav li a:hover {
   background: rgba(255,255,255,0.3);
 }
 
-/* 新增：背景霧化遮罩 */
+/* ★背景霧化遮罩 */
 #overlay {
   position: fixed;
   top: 0; left: 0;
@@ -216,7 +237,7 @@ nav ul.t-nav li a:hover {
   </nav>
 </header>
 
-<!-- 新增：背景霧化遮罩 -->
+<!-- 背景霧化遮罩 -->
 <div id="overlay"></div>
 
 <!-- 玻璃彈窗 -->
@@ -252,7 +273,7 @@ const modalData = {
   }
 };
 
-/* 打開彈窗 + 背景霧化淡入動畫 */
+/* 打開彈窗 */
 function openModal(key) {
   const modal = document.getElementById('modalBox');
   const overlay = document.getElementById('overlay');
@@ -261,18 +282,16 @@ function openModal(key) {
   document.getElementById('modalImage').src = modalData[key].img;
   document.getElementById('modalContent').innerHTML = modalData[key].content;
 
-  // 顯示遮罩
-  overlay.classList.remove('hidden');
   overlay.style.display = 'block';
-  requestAnimationFrame(() => overlay.classList.add('show'));
-
-  // 顯示彈窗
-  modal.classList.remove('hidden');
   modal.style.display = 'block';
-  requestAnimationFrame(() => modal.classList.add('show'));
+
+  requestAnimationFrame(() => {
+    overlay.classList.add('show');
+    modal.classList.add('show');
+  });
 }
 
-/* 關閉彈窗 + 背景霧化淡出動畫 */
+/* 關閉彈窗 */
 function closeModal() {
   const modal = document.getElementById('modalBox');
   const overlay = document.getElementById('overlay');
@@ -280,14 +299,12 @@ function closeModal() {
   modal.classList.remove('show');
   overlay.classList.remove('show');
 
-  // 動畫完成後隱藏元素
   setTimeout(() => {
     modal.style.display = 'none';
     overlay.style.display = 'none';
-  }, 300); // 與 CSS transition 時間一致
+  }, 300);
 }
 
-// 點遮罩也能關閉
 document.getElementById('overlay').onclick = closeModal;
 </script>
 
