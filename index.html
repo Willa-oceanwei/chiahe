@@ -5,135 +5,123 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>佳咊實業有限公司</title>
 
-<!-- HTML5UP Dimension 官方 CSS -->
+<!-- Dimension 官方 CSS -->
 <link rel="stylesheet" href="https://html5up.net/uploads/demos/dimension/assets/css/main.css" />
 
 <style>
-
-/* ===========================
-   🔥 全站背景設定
-=========================== */
+/* --- 全站背景 --- */
 body {
   background: url("assets/images/neom-SUIMrEKVOXc-unsplash.jpg") no-repeat center center fixed;
   background-size: cover;
 }
 
-/* ===========================
-   🔥 導覽列恢復 Dimension 正中央圓鑽風格
-=========================== */
-/* nav 整體在畫面中央，左右各留白 25% */
-nav {
-  width: 50%;
+/* --- 中央鑽石內容置中範圍（與 Dimension 官網一致） --- */
+#header .content {
+  max-width: 45%;
   margin: 0 auto;
 }
 
-/* 白字 + 官方樣式 */
-nav ul li a {
-  color: #ffffff !important;
-  letter-spacing: 0.12em;
-  font-size: 0.9rem;
-  font-weight: 600;
+/* --- 標題 & 副標題 --- */
+#header h1 {
+  color: white;
+  font-size: 42px;
+  letter-spacing: 2px;
+}
+#header p {
+  color: white;
+  font-size: 20px;
+  opacity: 0.9;
 }
 
-/* 官方風格：導覽列置中排版 */
+/* --- 導覽列永遠白字 + 去除底色 --- */
+nav ul li a {
+  color: #ffffff !important;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* --- 導覽列置中對齊（與 Dimension 原版一致） --- */
+nav {
+  width: 45%;
+  margin: 0 auto;
+}
 nav ul {
   display: flex;
   justify-content: center;
-  align-items: center;
 }
-
 nav ul li {
-  list-style: none;
-  padding: 0 18px;
+  padding: 0 25px;
   text-align: center;
 }
 
-/* 中文置中 */
-nav ul li a {
-  display: inline-block;
-  text-align: center;
-}
-
-/* ===========================
-   🔥 彈窗（玻璃磨砂）
-=========================== */
+/* --- 玻璃彈窗 --- */
 .modal {
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 60%;
+  width: 55%;
   transform: translate(-50%, -50%);
-  background: rgba(255, 255, 255, 0.10);
-  backdrop-filter: blur(14px);
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
   padding: 40px;
-  border-radius: 18px;
+  border-radius: 16px;
   text-align: center;
   z-index: 9999;
   display: none;
 }
 
-/* 彈窗標題 */
+/* 標題 */
 .modal-header {
   font-size: 28px;
   margin-bottom: 20px;
   color: #fff;
-  font-weight: 700;
 }
 
-/* 🔥 你要求：圖片占彈窗 80% 並避免過高 */
+/* 圖片：寬 80%，高度自動 */
 .modal-image img {
   width: 80%;
-  max-height: 45vh;      /* 限制最高不超過視窗的一半 */
-  object-fit: cover;
+  height: auto;
   border-radius: 10px;
   margin-bottom: 20px;
 }
 
-/* 彈窗內容 */
+/* 內容文字 */
 .modal-content {
   font-size: 18px;
   color: #fff;
   line-height: 1.6;
 }
 
-/* Close 按鈕：透明與更明顯框線 */
+/* Close 按鈕 */
 .close-btn {
   margin-top: 20px;
-  padding: 10px 26px;
-  font-size: 15px;
+  padding: 10px 25px;
+  font-size: 16px;
   border-radius: 10px;
-  border: 2px solid rgba(255, 255, 255, 0.7);
-  background: rgba(255, 255, 255, 0.12);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.1);
   color: #fff;
   cursor: pointer;
 }
-
 .close-btn:hover {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.3);
 }
-
-/* 避免被壓在背景之下 */
-#main, #header {
-  z-index: 1;
-}
-
 </style>
 </head>
 
 <body>
 
-<!-- ===========================
-     🔥 頁面 header（保留官方結構）
-=========================== -->
+<!-- Header -->
 <header id="header">
   <div class="content">
     <div class="inner">
       <h1>佳咊實業有限公司</h1>
-      <p>高品質色粉供應商</p>
+      <p>你的色彩 · 獨一無二</p>
     </div>
   </div>
 
-  <!-- 🔥 導覽列（中間置中 + 鑽石排版 + 白字） -->
+  <!-- 導覽列 -->
   <nav>
     <ul>
       <li><a href="#" onclick="openModal('intro')">關於佳咊</a></li>
@@ -144,9 +132,7 @@ nav ul li a {
   </nav>
 </header>
 
-<!-- ===========================
-     🔥 彈窗
-=========================== -->
+<!-- 彈窗 -->
 <div class="modal" id="modalBox">
   <div class="modal-header" id="modalTitle">標題</div>
   <div class="modal-image"><img id="modalImage" src=""></div>
@@ -155,27 +141,27 @@ nav ul li a {
 </div>
 
 <script>
-/* 各模組內容 */
+/* --- 各頁內容 --- */
 const modalData = {
   intro: {
     title: '關於佳咊',
     img: 'assets/images/company.jpg',
-    content: '公司介紹內容...'
+    content: '佳咊實業是專業的色粉供應商...'
   },
   work: {
     title: '服務內容',
     img: 'https://raw.githubusercontent.com/Willa-oceanwei/chiahe/main/assets/images/modalData.work.img.jpg',
-    content: '服務內容介紹...'
+    content: '我們提供客製化調色、生產與技術支援...'
   },
   about: {
     title: '產品介紹',
     img: 'assets/images/products.jpg',
-    content: '產品資訊說明...'
+    content: '專業色粉、塑膠母粒、Pantone 色票比對...'
   },
   contact: {
     title: '聯絡我們',
     img: 'assets/images/contact.jpg',
-    content: '電話：xxx<br>地址：xxx'
+    content: '電話：xxx-xxx<br>地址：xxx'
   }
 };
 
@@ -183,6 +169,7 @@ function openModal(key) {
   document.getElementById('modalTitle').innerHTML = modalData[key].title;
   document.getElementById('modalImage').src = modalData[key].img;
   document.getElementById('modalContent').innerHTML = modalData[key].content;
+
   document.getElementById('modalBox').style.display = 'block';
 }
 
