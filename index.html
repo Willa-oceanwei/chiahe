@@ -52,7 +52,7 @@ body {
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.1);
+  background: rgba(0,0,0,0.3); /* 深色帶透明 */
   border: 2px solid #fff;
   display: flex;
   justify-content: center;
@@ -112,30 +112,6 @@ nav ul.t-nav li a:hover {
   text-shadow: 0 0 5px rgba(255,255,255,0.7);
 }
 
-/* 下方四格按鈕 */
-.bottom-buttons {
-  display: flex;
-  justify-content: space-between;
-  width: 60%;
-  margin-top: 20px;
-  opacity: 0;
-  animation: bottomFadeIn 1s 1.4s forwards;
-}
-.bottom-buttons .btn {
-  flex: 1;
-  text-align: center;
-  padding: 10px 0;
-  font-weight: bold;
-  color: #fff;
-  cursor: pointer;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
-  transition: 0.3s;
-}
-.bottom-buttons .btn:hover {
-  background: rgba(255,255,255,0.2);
-}
-
 /* 玻璃彈窗 */
 .modal {
   position: fixed;
@@ -143,7 +119,7 @@ nav ul.t-nav li a:hover {
   left: 50%;
   width: 60%;
   transform: translate(-50%, -50%);
-  background: rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.7); /* 深色透明度 */
   backdrop-filter: blur(12px);
   padding: 40px;
   border-radius: 16px;
@@ -191,8 +167,6 @@ nav ul.t-nav li a:hover {
 @keyframes logoFadeIn { to { opacity: 1; } }
 @keyframes titleFadeIn { to { opacity: 1; } }
 @keyframes navFadeIn { to { opacity: 1; } }
-@keyframes bottomFadeIn { to { opacity: 1; } }
-
 </style>
 </head>
 
@@ -222,14 +196,6 @@ nav ul.t-nav li a:hover {
       <li><a href="#" onclick="openModal('contact')">聯絡我們</a></li>
     </ul>
   </nav>
-
-  <!-- 下方四格按鈕 -->
-  <div class="bottom-buttons">
-    <div class="btn" onclick="openModal('intro')">Intro</div>
-    <div class="btn" onclick="openModal('work')">Work</div>
-    <div class="btn" onclick="openModal('about')">About</div>
-    <div class="btn" onclick="openModal('contact')">Contact</div>
-  </div>
 </header>
 
 <!-- 玻璃彈窗 -->
@@ -265,19 +231,33 @@ const modalData = {
   }
 };
 
+/* 打開彈窗 + 滑動到中心 */
 function openModal(key) {
   const modal = document.getElementById('modalBox');
   document.getElementById('modalTitle').innerHTML = modalData[key].title;
   document.getElementById('modalImage').src = modalData[key].img;
   document.getElementById('modalContent').innerHTML = modalData[key].content;
-  modal.classList.add('show');
+
+  // 先平滑滾動到彈窗位置（頁面中間）
+  const scrollTo = window.innerHeight / 2;
+  window.scrollTo({
+    top: scrollTo,
+    behavior: 'smooth'
+  });
+
+  // 延遲 300ms 再顯示彈窗，產生淡入效果
+  setTimeout(() => {
+    modal.classList.add('show');
+  }, 300);
 }
 
+/* 關閉彈窗 */
 function closeModal() {
   const modal = document.getElementById('modalBox');
   modal.classList.remove('show');
 }
 </script>
+
 
 </body>
 </html>
