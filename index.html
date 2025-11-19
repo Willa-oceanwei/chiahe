@@ -32,12 +32,14 @@ body {
 }
 @keyframes headerFadeIn { to { opacity: 1; } }
 
-/* 禁用 transform 壓扁 logo */
+/* 禁用 Dimension transform 壓扁 logo */
 .logo-wrapper, 
 .logo-circle, 
 .diamond-shape {
   transform: none !important;
 }
+
+/* 圓形鑽石 */
 .logo-wrapper {
   display: flex;
   justify-content: center;
@@ -87,6 +89,7 @@ nav {
   margin: 0 auto;
   opacity: 0;
   animation: navFadeIn 1s 1.2s forwards;
+  display: flex;
 }
 nav ul.t-nav {
   display: flex;
@@ -117,8 +120,8 @@ nav ul.t-nav li a:hover {
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 50%;
-  max-width: 600px;
+  width: 60%;
+  max-width: 700px;
   transform: translate(-50%, -50%) scale(0.9);
   background: rgba(0,0,0,0.8);
   backdrop-filter: blur(12px);
@@ -156,12 +159,12 @@ nav ul.t-nav li a:hover {
   margin-bottom: 20px;
 }
 
-/* 聯絡表單排版 */
+/* 聯絡我們表單 — Dimension 官網排版 */
 .contact-form {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  margin-top: 10px;
+  width: 100%;
 }
 .contact-form .form-row {
   display: flex;
@@ -169,36 +172,39 @@ nav ul.t-nav li a:hover {
 }
 .contact-form input,
 .contact-form textarea {
-  flex: 1;
   padding: 10px;
   border-radius: 6px;
   border: 2px solid #fff;
+  font-size: 16px;
   background: transparent;
   color: #fff;
-  font-size: 16px;
+  flex: 1;
 }
 .contact-form textarea {
-  resize: none;
+  width: 100%;
 }
 .contact-form .button-group {
   display: flex;
-  gap: 10px;
+  gap: 15px;
+  justify-content: flex-start;
 }
-.contact-form button {
+.contact-form .button-group button {
   flex: 1;
-  padding: 10px 0;
-  font-weight: 700;
+  max-width: 45%;
+  min-width: 100px;
+  padding: 10px;
   border-radius: 6px;
+  font-weight: 700;
   border: 2px solid #fff;
   cursor: pointer;
 }
 .contact-form button#submitBtn {
   background: #fff;
-  color: #000;
+  color: #000 !important;
 }
 .contact-form button#resetBtn {
   background: #000;
-  color: #fff;
+  color: #fff !important;
 }
 
 /* 關閉按鈕 */
@@ -276,13 +282,25 @@ nav ul.t-nav li a:hover {
 
 <script>
 const modalData = {
-  intro: { title: '關於佳咊', content: '佳咊實業成立於1990年，專注於色粉、顏料與色彩應用開發。我們致力於提供穩定品質、創新配方與客製化服務。' },
-  work: { title: '服務內容', content: '・塑膠色粉調色  ・Pantone 色號比對  ・客製化顏色研發  ・技術諮詢與色彩管理' },
-  about: { title: '產品介紹', content: '我們提供： PE色母、PP色母、透明色粉、金屬色粉、特殊效果顏料（珠光、螢光、金蔥）' },
-  contact: { title: '聯絡我們', content: '' }
+  intro: {
+    title: '關於佳咊',
+    content: '佳咊實業成立於1990年，專注於色粉、顏料與色彩應用開發。我們致力於提供穩定品質、創新配方與客製化服務。'
+  },
+  work: {
+    title: '服務內容',
+    content: '・塑膠色粉調色  ・Pantone 色號比對  ・客製化顏色研發  ・技術諮詢與色彩管理'
+  },
+  about: {
+    title: '產品介紹',
+    content: '我們提供： PE色母、PP色母、透明色粉、金屬色粉、特殊效果顏料（珠光、螢光、金蔥）'
+  },
+  contact: {
+    title: '聯絡我們',
+    content: ''
+  }
 };
 
-function openModal(key) {
+function openModal(key){
   const modal = document.getElementById('modalBox');
   const overlay = document.getElementById('overlay');
   const formContainer = document.getElementById('contactFormContainer');
@@ -307,18 +325,16 @@ function openModal(key) {
     `;
   } else { formContainer.innerHTML = ''; }
 
-  // 隱藏導覽列
-  if(nav) nav.style.display = 'none';
-
+  if(nav) nav.style.visibility = 'hidden';
   overlay.style.display = 'block';
   modal.style.display = 'block';
-  requestAnimationFrame(() => {
+  requestAnimationFrame(()=>{
     overlay.classList.add('show');
     modal.classList.add('show');
   });
 }
 
-function closeModal() {
+function closeModal(){
   const modal = document.getElementById('modalBox');
   const overlay = document.getElementById('overlay');
   const formContainer = document.getElementById('contactFormContainer');
@@ -327,11 +343,11 @@ function closeModal() {
   modal.classList.remove('show');
   overlay.classList.remove('show');
 
-  setTimeout(() => {
+  setTimeout(()=>{
     modal.style.display = 'none';
     overlay.style.display = 'none';
     formContainer.innerHTML = '';
-    if(nav) nav.style.display = 'flex';
+    if(nav) nav.style.visibility = 'visible';
   }, 300);
 }
 
