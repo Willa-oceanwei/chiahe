@@ -4,294 +4,161 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>佳咊實業有限公司</title>
+
+<!-- HTML5UP Dimension 原始 CSS -->
 <link rel="stylesheet" href="https://html5up.net/uploads/demos/dimension/assets/css/main.css" />
+
 <style>
-  body {
-    margin: 0;
-    font-family: 'Arial', sans-serif;
-    color: #F000;
-    overflow-x: hidden;
-    background: url('https://raw.githubusercontent.com/Willa-oceanwei/chiahe/main/assets/images/neom-SUIMrEKVOXc-unsplash.jpg') no-repeat center center fixed;
-    background-size: cover;
+/* --- 全站背景覆蓋 --- */
+body {
+  background: url("assets/images/kevin-bessat-background.jpg") no-repeat center center fixed;
+  background-size: cover;
 }
 
-  #wrapper { position: relative; z-index: 0; }
+/* --- 修正 Dimension 官方導覽列：永遠白字 --- */
+nav ul li a {
+  color: #ffffff !important;
+}
 
-  /* header 調整 */
-  header {
-      position: relative;
-      min-height: auto; /* 不再 100vh */
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start; /* 內容靠上 */
-      align-items: center;
-      padding-top: 50px;
-      z-index: 1;
-      /* header 上下黑線 */
-      border-top: 2px solid #fff;
-      border-bottom: 2px solid #fff;
-  }
+/* --- 導覽列按鈕重新對齊為 Dimension 官方置中 --- */
+nav ul {
+  display: flex;
+  justify-content: center;
+  gap: 0 !important;         /* 禁止左右縫隙（否則偏移） */
+}
 
-  header .content .inner {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      padding: 50px 20px;
-  }
-  
-  /* 導航列 */
-  nav {
-      position: relative; /* 重要 */
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      margin-top: 20px;
-      z-index: 2; /* 保證可點擊 */
-  }
+nav ul li {
+  padding: 0 25px;          /* 平均分布 */
+}
 
-  nav ul {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      gap: 30px;
-  }
+/* --- 彈窗（玻璃效果） --- */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 60%;                  /* 🔥 整個彈窗寬度 */
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  padding: 40px;
+  border-radius: 16px;
+  text-align: center;
+  z-index: 9999;
+  display: none;
+}
 
-  nav ul li a {
-    display: inline-block;
-    padding: 10px 15px;
-    background: rgba(40,40,40,0.4); 
-    border: 2px solid #000;       
-    border-radius: 5px;
-    color: #000;                  
-    text-decoration: none;
-    font-weight: bold;
-    transition: 0.3s;
-  }
+/* 彈窗標題 */
+.modal-header {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #fff;
+}
 
-  nav ul li a:hover {
-    background: rgba(255,255,255,0.9); 
-    color: #000;                       
-  }
+/* 彈窗圖片：寬度 80%，高度自動 */
+.modal-image img {
+  width: 80%;                 /* 🔥 你的要求：圖片占彈窗 80% */
+  height: auto;               /* 高度自動、保持比例 */
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
 
-  nav ul li a:active {
-    background: rgba(200,200,200,0.9); 
-    color: #000;                        
-  }
+/* 彈窗文字 */
+.modal-content {
+  font-size: 18px;
+  color: #fff;
+  line-height: 1.6;
+}
 
-  /* overlay 淡化背景 */
-  #overlay {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.5);
-      opacity: 0;
-      pointer-events: none; 
-      transition: opacity 0.4s ease;
-      z-index: 999;
-  }
-  #overlay.active { 
-      opacity: 1; 
-      pointer-events: auto; 
-  }
+/* Close 按鈕（微透明） */
+.close-btn {
+  margin-top: 20px;
+  padding: 10px 25px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  cursor: pointer;
+}
 
-  /* 玻璃彈窗 */
-  .modal {
-    position: fixed;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%) scale(0.85);
-    width: 70%;          /* 彈窗寬度 */
-    max-width: none;     /* 取消限制 */
-    background: rgba(40,40,40,0.85);
-    border-radius: 20px;
-    backdrop-filter: blur(20px);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.35s ease;
-    color: #fff;
-    z-index: 1000;
-    overflow: hidden;    /* 防止圖片溢出 */
-  }
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
 
-  .modal.active {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translate(-50%, -50%) scale(1);
-  }
+/* --- 讓內容與彈窗疊加層正確 --- */
+#main, #header {
+  z-index: 1;
+}
 
-  /* 圖片區 */
-  .modal-image {
-      width: 100%;             /* 保持彈窗整體寬度 */
-      display: flex;           /* 使用 flex 置中圖片 */
-      justify-content: center; /* 水平置中 */
-      margin-top: 0;
-      margin-bottom: 0;
-  }
-
-  .modal-image img {
-      width: 90%;             /* 圖片寬度占彈窗的90% */
-      height: auto;           /* 保持圖片比例 */
-      object-fit: cover;      /* 防止拉伸 */
-      border-radius: 5px;    /* 可選：圖片圓角 */
-  }
-
-  /* 文字區 */
-  .modal-content {
-    padding: 20px;
-    font-size: 16px;
-    line-height: 1.6;
-    color: #fff;
-  }
-
-  .close-btn {
-    margin: 15px 20px;
-    padding: 10px 20px;
-    border: none;
-    background: rgba(255,255,255,0.8);
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 16px;
-    color: #000;
-  }
-
-  /* header 文字設定 */
-  header .content .inner {
-      text-align: center;
-      font-family: 'Arial', sans-serif;
-  }
-
-  header .content .inner h1 {
-      font-size: 48px;     
-      color: #fff;      
-      font-weight: bold;
-      margin: 0;
-  }
-
-  header .content .inner p {
-      font-size: 26px;     
-      color: #333333;      
-      margin-top: 10px;
-  }
-
-  /* 導航列上下黑線 */
-  nav {
-      border-top: 2px solid #fff;
-      border-bottom: 2px solid #fff;
-  }
 </style>
 </head>
+
 <body>
 
-<div id="wrapper">
-  <header id="header">
-    <div class="logo"><span class="icon fa-gem"></span></div>
-    <div class="content">
-      <div class="inner">
-        <h1>佳咊實業有限公司</h1>
-        <p>你的色彩 獨一無二</p>
-      </div>
+<!-- Header（維持 Dimension 官方結構） -->
+<header id="header">
+  <div class="content">
+    <div class="inner">
+      <h1>佳咊實業有限公司</h1>
+      <p>高品質色粉供應商</p>
     </div>
-    <nav>
-      <ul>
-        <li><a class="modal-link" data-modal="intro">Intro</a></li>
-        <li><a class="modal-link" data-modal="work">Work</a></li>
-        <li><a class="modal-link" data-modal="about">About</a></li>
-        <li><a class="modal-link" data-modal="contact">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
+  </div>
 
-  <div id="main"></div>
+  <!-- 🔥 導覽列：已自動置中 + 白字 -->
+  <nav>
+    <ul>
+      <li><a href="#" onclick="openModal('intro')">關於佳咊</a></li>
+      <li><a href="#" onclick="openModal('work')">服務內容</a></li>
+      <li><a href="#" onclick="openModal('about')">產品介紹</a></li>
+      <li><a href="#" onclick="openModal('contact')">聯絡我們</a></li>
+    </ul>
+  </nav>
+</header>
 
-  <footer id="footer">
-    <p class="copyright">© Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
-  </footer>
-</div>
-
-<!-- overlay -->
-<div id="overlay"></div>
-
-<!-- modal 範例 -->
+<!-- 🔥 玻璃彈窗 -->
 <div class="modal" id="modalBox">
-  <div class="modal-header" id="modalTitle">Title</div>
-  <div class="modal-image"><img id="modalImage" src="" alt="Modal Image"></div>
-  <div class="modal-content" id="modalContent">Content goes here...</div>
-  <button class="close-btn" id="closeModal">Close</button>
+  <div class="modal-header" id="modalTitle">標題</div>
+  <div class="modal-image"><img id="modalImage" src=""></div>
+  <div class="modal-content" id="modalContent">內容文字</div>
+  <button class="close-btn" onclick="closeModal()">關閉</button>
 </div>
 
 <script>
-window.addEventListener('load', () => {
-    document.body.classList.remove('is-preload');
-});
-
-const modalLinks = document.querySelectorAll('.modal-link');
-const overlay = document.getElementById('overlay');
-const modal = document.getElementById('modalBox');
-const modalTitle = document.getElementById('modalTitle');
-const modalImage = document.getElementById('modalImage');
-const modalContent = document.getElementById('modalContent');
-const closeBtn = document.getElementById('closeModal');
-
+/* --- 你可在這裡放入各頁內容（文字 + 個別圖片） --- */
 const modalData = {
-  intro: { 
-    title: '關於佳咊', 
-    img: 'https://raw.githubusercontent.com/Willa-oceanwei/chiahe/main/assets/images/about.jpg', 
-    content: `佳咊實業成立於 1990 年，專注於色粉、顏料與色彩應用開發。我們致力於提供穩定品質、創新配方與客製化服務。`
+  intro: {
+    title: '關於佳咊',
+    img: 'assets/images/company.jpg',
+    content: '公司介紹內容...'
   },
-  work: { 
-    title: '服務內容', 
-    img: 'https://raw.github.com/Willa-oceanwei/chiahe/main/assets/images/majid-abparvar-work.jpg', 
-    content: `・塑膠色粉調色  
-・Pantone 色號比對服務  
-・客製化顏色研發  
-・技術諮詢與色彩管理`
+  work: {
+    title: '服務內容',
+    img: 'assets/images/services.jpg',
+    content: '服務內容介紹...'
   },
-  about: { 
-    title: '產品內容', 
-    img: 'https://raw.githubusercontent.com/Willa-oceanwei/chiahe/main/assets/images/products.jpg', 
-    content: `我們提供：  
-・PE 色母  
-・PP 色母  
-・透明色粉  
-・金屬色粉  
-・特殊效果顏料（珠光、螢光、金蔥）`
+  about: {
+    title: '產品介紹',
+    img: 'assets/images/products.jpg',
+    content: '產品資訊說明...'
   },
-  contact: { 
-    title: '聯繫我們', 
-    img: 'https://raw.githubusercontent.com/Willa-oceanwei/chiahe/main/assets/images/contact.jpg', 
-    content: `佳咊實業有限公司  
-📍 台南市永康區中正南路309號  
-☎ 06-2536526
-📧 service@chiahe.com.tw`
+  contact: {
+    title: '聯絡我們',
+    img: 'assets/images/contact.jpg',
+    content: '電話：xxx<br>地址：xxx'
   }
 };
 
-modalLinks.forEach(link => {
-  link.addEventListener('click', e => {
-    e.preventDefault();
-    const key = link.getAttribute('data-modal');
-    modalTitle.textContent = modalData[key].title;
-    modalImage.src = modalData[key].img;
-    modalContent.textContent = modalData[key].content;
-    overlay.classList.add('active');
-    modal.classList.add('active');
-  });
-});
+function openModal(key) {
+  document.getElementById('modalTitle').innerHTML = modalData[key].title;
+  document.getElementById('modalImage').src = modalData[key].img;
+  document.getElementById('modalContent').innerHTML = modalData[key].content;
 
-closeBtn.onclick = () => {
-  overlay.classList.remove('active');
-  modal.classList.remove('active');
-};
+  document.getElementById('modalBox').style.display = 'block';
+}
 
-document.addEventListener('keydown', e => {
-  if(e.key === 'Escape') {
-    overlay.classList.remove('active');
-    modal.classList.remove('active');
-  }
-});
+function closeModal() {
+  document.getElementById('modalBox').style.display = 'none';
+}
 </script>
 
 </body>
